@@ -1,0 +1,186 @@
+{
+ "c_hook": {
+  "text": "Tôi chỉ định làm một cái content thôi...",
+  "spoken": "Tôi chỉ định làm một cái còn ten thôi...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_research": {
+  "text": "Research tí đã...",
+  "spoken": "rì sớt tí đã...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_trend": {
+  "text": "Ối, trend này hot nè!",
+  "spoken": "Ối, trend này hot nè!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_trend2": {
+  "text": "Ơ... hết hot rồi.",
+  "spoken": "Ơ... hết hot rồi.",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_idea": {
+  "text": "Nghĩ idea... nghĩ idea...",
+  "spoken": "Nghĩ ai đia... nghĩ ai đia...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_idea2": {
+  "text": "A, có rồi!",
+  "spoken": "A, có rồi!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_caption": {
+  "text": "Xoá! Viết lại!",
+  "spoken": "Xoá! Viết lại!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_edit": {
+  "text": "Edit nốt... render nữa là xong...",
+  "spoken": "Edit nốt... render nữa là xong...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_done": {
+  "text": "Xong!",
+  "spoken": "Xong!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_punch": {
+  "text": "Ủa? Hết ngày rồi?",
+  "spoken": "Ủa? Hết ngày rồi?",
+  "voice": "Ngọc Huyền",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_morning": {
+  "text": "Ơ... mới chín giờ sáng?",
+  "spoken": "Ơ... mới chín giờ sáng?",
+  "voice": "Ngọc Huyền",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_1": {
+  "text": "Đừng để một cái content ngốn trọn cả ngày của bạn.",
+  "spoken": "Đừng để một cái còn ten ngốn trọn cả ngày của bạn.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_2": {
+  "text": "AIMA, trợ lý AI cho content marketing.",
+  "spoken": "ai ma, trợ lý AI cho còn ten marketing.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_3": {
+  "text": "Tự động bắt trend theo ngành hàng.",
+  "spoken": "Tự động bắt trend theo ngành hàng.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_4": {
+  "text": "Gợi ý ý tưởng, viết kịch bản, caption và hashtag.",
+  "spoken": "Gợi ý ý tưởng, viết kịch bản, caption và hashtag.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_5": {
+  "text": "Tối ưu riêng cho Facebook, TikTok, Instagram và Threads.",
+  "spoken": "Tối ưu riêng cho Facebook, TikTok, Instagram và Threads.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_6": {
+  "text": "Lên lịch, tự đăng bài và đo hiệu quả.",
+  "spoken": "Lên lịch, tự đăng bài và đo hiệu quả.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_7": {
+  "text": "Tất cả, trong một luồng làm việc.",
+  "spoken": "Tất cả, trong một luồng làm việc.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "n_8": {
+  "text": "AIMA. Làm content, nhẹ tênh.",
+  "spoken": "ai ma. Làm còn ten, nhẹ tênh.",
+  "voice": "Hải Đăng",
+  "tempo": 0.92,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_punch1": {
+  "text": "Ủa?",
+  "spoken": "Ủa?",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_punch2": {
+  "text": "Hết ngày rồi?",
+  "spoken": "Hết ngày rồi?",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_morning1": {
+  "text": "Ơ...",
+  "spoken": "Ơ...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "c_morning2": {
+  "text": "Mới chín giờ sáng?",
+  "spoken": "Mới chín giờ sáng?",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ }
+}

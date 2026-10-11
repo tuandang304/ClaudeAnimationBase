@@ -1,2 +1,21 @@
-node_modules
+# dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# renders: out/<video>/ (frames, sheets, video.mp4) — rebuild with render.mjs
 out/
+
+# temporary files the audio tools write while they work
+*.tmp.wav
+videos/*/audio/soundtrack.wav
+
+# machine and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.log
+.env

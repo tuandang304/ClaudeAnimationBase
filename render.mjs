@@ -1,4 +1,6 @@
-// render.mjs: renders studio.html in headless Chrome. Length and fps come from the page (PROJECT in src/config.js).
+// render.mjs: renders one video (videos/<name>/) through studio.html in headless Chrome. Length and fps come from the
+// page (PROJECT in videos/<name>/video.js). Pick the video with --video=<name> (default: demo); everything it writes
+// goes to out/<name>/ unless you pass --out.
 //
 //   Look at it (open the images with your image viewer / Read tool):
 //     node render.mjs --sheet=0.5,1,1.5,2 [--cols=4] [--w=480] --out=out/check/a.jpg        contact sheet of chosen times
@@ -8,12 +10,12 @@
 //         (x,y in world px, may be page expressions like PLK.MX(1.38); w,h in screen px) through each frame's camera
 //     node render.mjs --stills=1.2,3.4 --out=out/stills                                     full-res PNGs
 //   Make the video:
-//     node render.mjs --clip [--range=0:4] --out=out/video.mp4                               straight to MP4 (one worker)
-//     node render.mjs --frames [--range=0:8] --workers=4                                     JPEG frames → out/frames (parallel, resumable)
-//     node render.mjs --encode --out=out/video.mp4                                           out/frames → MP4
+//     node render.mjs --video=aima-01 --clip [--range=0:4]                                  straight to out/aima-01/video.mp4 (one worker)
+//     node render.mjs --video=aima-01 --frames [--range=0:8] --workers=4                    JPEG frames → out/aima-01/frames (parallel, resumable)
+//     node render.mjs --video=aima-01 --encode                                              out/aima-01/frames → out/aima-01/video.mp4
 //   Standalone loops (LOOPS in the page): add --loop=<name> to any of the above (times are then loop times), or
 //     node render.mjs --loop=emotions --png --out=out/loop_emotions                          one cycle as PNGs (for GIFs)
-//   Music: --audio=assets/song.mp3 (or PROJECT.audio) is muxed into --clip and --encode. Other flags: --fps=24,
+//   Music: --audio=assets/song.mp3 (or the video's PROJECT.audio) is muxed into --clip and --encode. Other flags: --fps=24,
 //   --chrome=<path to Chrome/Chromium>.
 import puppeteer from 'puppeteer-core';
 import { spawn } from 'node:child_process';
@@ -21,6 +23,7 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync, statSync, renameSyn
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { homedir } from 'node:os';
+import { runInNewContext } from 'node:vm';
 
 const args = Object.fromEntries(process.argv.slice(2).map(a => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
 const CHROMES = [args.chrome, process.env.CHROME_PATH, 'C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
@@ -35,7 +38,14 @@ function playwrightChromes() {
 }
 const CHROME = CHROMES.find(p => p && existsSync(p));
 if (!CHROME) { console.error('Chrome not found: pass --chrome=<path> or set CHROME_PATH'); process.exit(1); }
-const fps = +(args.fps || 24), FRAMES_DIR = 'out/frames';
+const VIDEO = args.video || 'demo', VDIR = `videos/${VIDEO}`;
+if (!existsSync(`${VDIR}/video.js`)) { console.error(`no video "${VIDEO}": pick one of ${readdirSync('videos').join(', ')} with --video=<name>`); process.exit(1); }
+const PROJECT = runInNewContext(readFileSync(`${VDIR}/video.js`, 'utf8') + '\n;PROJECT');
+const OUT = `out/${VIDEO}`, fps = +(args.fps || 24), FRAMES_DIR = `${OUT}/frames`;
+// the soundtrack: --audio, or PROJECT.audio (relative to the video's folder)
+const AUDIO = args.audio || (PROJECT.audio ? `${VDIR}/${PROJECT.audio}` : '');
+if (AUDIO && !existsSync(AUDIO) && (args.clip || args.encode)) { console.error(`soundtrack ${AUDIO} not found: build it (see ${VDIR}/audio/) or pass --audio=`); process.exit(1); }
+console.log(`video: ${VIDEO} (${PROJECT.title || ''}, ${(+PROJECT.duration).toFixed(2)} s)`);
 const run = (cmd, a) => new Promise((ok, bad) => { const p = spawn(cmd, a, { stdio: 'inherit' }); p.on('close', c => c ? bad(new Error(cmd + ' exited ' + c)) : ok()); });
 const times = s => String(s).split(',').map(Number);
 const span = s => String(s).split(':').map(Number);
@@ -43,9 +53,7 @@ const span = s => String(s).split(':').map(Number);
 const fields = s => { const out = []; let d = 0, cur = ''; for (const ch of String(s)) { if (ch === ',' && !d) { out.push(cur); cur = ''; continue; } d += ch === '(' ? 1 : ch === ')' ? -1 : 0; cur += ch; } out.push(cur); return out.map(v => isNaN(+v) ? v : +v); };
 
 if (args.encode) {
-  // the soundtrack: --audio, or PROJECT.audio in src/config.js
-  const cfgAudio = (readFileSync('src/config.js', 'utf8').match(/audio:\s*['"]([^'"]+)['"]/) || [])[1];
-  const out = args.out || 'out/video.mp4', n = readdirSync(FRAMES_DIR).filter(f => f.endsWith('.jpg')).length, audio = args.audio || cfgAudio;
+  const out = args.out || `${OUT}/video.mp4`, n = readdirSync(FRAMES_DIR).filter(f => f.endsWith('.jpg')).length, audio = AUDIO;
   console.log(`encoding ${n} frames → ${out}${audio ? ' with ' + audio : ''}`);
   await run('ffmpeg', ['-y', '-loglevel', 'error', '-stats', '-framerate', String(fps), '-i', `${FRAMES_DIR}/f%05d.jpg`,
     ...(audio ? ['-i', audio, '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '192k', '-shortest'] : []),
@@ -72,7 +80,7 @@ async function openPage(tag = '') {
   const page = await browser.newPage();
   page.on('console', m => { if (['error', 'warn'].includes(m.type())) console.log(`[page${tag}]`, m.text()); });
   page.on('pageerror', e => console.log(`[page error${tag}]`, e.message));
-  await page.goto(pathToFileURL(resolve('studio.html')).href + '?render', { waitUntil: 'networkidle0' });
+  await page.goto(pathToFileURL(resolve('studio.html')).href + `?render&video=${encodeURIComponent(VIDEO)}`, { waitUntil: 'networkidle0' });
   await page.waitForFunction('window.ready === true', { timeout: 60000 });
   if (args.loop) {
     const ok = await page.evaluate(name => { if (!LOOPS[name]) return false; window.LOOP = LOOPS[name]; return true; }, args.loop);
@@ -88,7 +96,7 @@ const frameOf = async (page, t, type, q) => {
 const lengthOf = page => page.evaluate(() => window.LOOP ? window.LOOP.len : DUR);
 
 if (args.sheet || args.strip) {
-  const page = await openPage(), out = args.out || 'out/sheet.jpg'; mkdirSync(dirname(out), { recursive: true });
+  const page = await openPage(), out = args.out || `${OUT}/sheet.jpg`; mkdirSync(dirname(out), { recursive: true });
   let ts;
   if (args.strip) { const [a, b] = span(args.strip); ts = []; for (let i = Math.round(a * fps); i <= Math.round(b * fps); i++) ts.push(i / fps); }
   else ts = times(args.sheet);
@@ -97,7 +105,7 @@ if (args.sheet || args.strip) {
   writeFileSync(out, Buffer.from(url.slice(url.indexOf(',') + 1), 'base64'));
   console.log(`${out}  (${ts.length} frames)  ms/frame: ${ms.join(' ')}`);
 } else if (args.stills) {
-  const page = await openPage(), out = args.out || 'out/stills'; mkdirSync(out, { recursive: true });
+  const page = await openPage(), out = args.out || `${OUT}/stills`; mkdirSync(out, { recursive: true });
   console.log('GPU:', await page.evaluate(() => window.gpuInfo()));
   for (const s of times(args.stills)) {
     const t0 = Date.now(), buf = await frameOf(page, s, 'image/png');
@@ -108,7 +116,7 @@ if (args.sheet || args.strip) {
   // PNG sequence (for GIFs): a loop's full cycle (frame n equals frame 0, so it isn't rendered), or --range=a:b.
   const probe = await openPage(), len = await lengthOf(probe); await probe.close();
   const [a, b] = args.range ? span(args.range) : [0, len], n = Math.round((b - a) * fps);
-  const out = args.out || `out/${args.loop ? 'loop_' + args.loop : 'png'}`, workers = +(args.workers || 3); mkdirSync(out, { recursive: true });
+  const out = args.out || `${OUT}/${args.loop ? 'loop_' + args.loop : 'png'}`, workers = +(args.workers || 3); mkdirSync(out, { recursive: true });
   let next = 0; const start = Date.now();
   await Promise.all(Array.from({ length: workers }, async (_, w) => {
     const page = await openPage('#' + w);
@@ -139,8 +147,8 @@ if (args.sheet || args.strip) {
 } else if (args.clip) {
   const page = await openPage(), len = await lengthOf(page);
   const [a, b] = args.range ? span(args.range) : typeof args.clip === 'string' ? span(args.clip) : [0, len];
-  const audio = args.audio || await page.evaluate(() => PROJECT.audio || '');
-  const out = args.out || 'out/clip.mp4'; mkdirSync(dirname(out), { recursive: true });
+  const audio = AUDIO;
+  const out = args.out || `${OUT}/video.mp4`; mkdirSync(dirname(out), { recursive: true });
   const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
     ...(audio ? ['-ss', String(a), '-t', String(b - a), '-i', audio, '-map', '0:v', '-map', '1:a', '-c:a', 'aac', '-b:a', '192k', '-shortest'] : []),
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', out],

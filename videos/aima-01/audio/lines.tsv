@@ -1,0 +1,23 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+c_hook	creator	Tôi chỉ định làm một cái content thôi...
+c_research	creator	Research tí đã...
+c_trend	creator	Ối, trend này hot nè!
+c_trend2	creator	Ơ... hết hot rồi.
+c_idea	creator	Nghĩ idea... nghĩ idea...
+c_idea2	creator	A, có rồi!
+c_caption	creator	Xoá! Viết lại!
+c_edit	creator	Edit nốt... render nữa là xong...
+c_done	creator	Xong!
+c_punch1	creator	Ủa?
+c_punch2	creator	Hết ngày rồi?
+c_morning1	creator	Ơ...
+c_morning2	creator	Mới chín giờ sáng?
+n_1	narrator	Đừng để một cái content ngốn trọn cả ngày của bạn.
+n_2	narrator	AIMA, trợ lý AI cho content marketing.
+n_3	narrator	Tự động bắt trend theo ngành hàng.
+n_4	narrator	Gợi ý ý tưởng, viết kịch bản, caption và hashtag.
+n_5	narrator	Tối ưu riêng cho Facebook, TikTok, Instagram và Threads.
+n_6	narrator	Lên lịch, tự đăng bài và đo hiệu quả.
+n_7	narrator	Tất cả, trong một luồng làm việc.
+n_8	narrator	AIMA. Làm content, nhẹ tênh.

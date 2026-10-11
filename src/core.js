@@ -1,5 +1,5 @@
 // core.js: constants, helpers, paper, paint wrapper, compositing and render hooks.
-// Length and rhythm come from PROJECT in config.js.
+// Length and rhythm come from PROJECT in the video's video.js (videos/<name>/video.js).
 const W = 1920, H = 1080;
 const BPM = PROJECT.bpm, BEAT = 60 / BPM, OFF = PROJECT.offset || 0, BOIL = 12, DUR = PROJECT.duration;
 const TAU = Math.PI * 2;
@@ -44,6 +44,21 @@ function kf(t, keys, e = ease) {
     }
   }
   return keys[keys.length - 1][1];
+}
+// Time warp: slow down (or speed up) stretches of a shot without retiming every key in it. A shot's keys are written in
+// EVENT time; rates [[e0, r0], [e1, r1], ...] say that from event time ei on, events play at speed ri (1 = as written,
+// .6 = 40% slower), and t0 is the clock time at which event time e0 happens. Returns at(t): clock time → event time,
+// with at.inv(e) (event → clock), at.keys(list) (a key list [[e, ...], ...] moved onto the clock, for emotions() and
+// kf() keys, so idles, blinks and wobbles keep running at full speed while the events spread out) and at.len (clock
+// time from t0 until event time `end`). tools/audiokit.py has the same function, so sound lands on the same frames.
+function warp(rates, end, t0 = 0) {
+  const K = [[t0, rates[0][0]]];
+  for (let i = 1; i < rates.length; i++) K.push([K[i - 1][0] + (rates[i][0] - rates[i - 1][0]) / rates[i - 1][1], rates[i][0]]);
+  const at = t => { let i = 0; while (i + 1 < K.length && t >= K[i + 1][0]) i++; return K[i][1] + (t - K[i][0]) * rates[i][1]; };
+  at.inv = e => { let i = 0; while (i + 1 < K.length && e >= K[i + 1][1]) i++; return K[i][0] + (e - K[i][1]) / rates[i][1]; };
+  at.keys = keys => keys.map(([e, ...rest]) => [at.inv(e), ...rest]);
+  at.len = at.inv(end) - t0;
+  return at;
 }
 // hex color mix
 function mixCol(a, b, k) {
