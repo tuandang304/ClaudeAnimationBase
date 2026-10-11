@@ -1,8 +1,11 @@
-// aima_creator.js: "Ủa? Hết ngày rồi?", a 27-second spot for AIMA (storyboard in STORYBOARD.md).
-// A creator sits down to make ONE piece of content and loses the whole day to research, trends, ideas, captions and
-// editing. The sky in the window runs through the AIMA gradient (cyan → blue → violet → magenta → night) while the
-// creator never notices, until the clock strikes midnight. Shots A–G are one room and one continuous camera (two
-// time-lapse push-ins on the clock, pans, a crash zoom); a brush wipe in the brand colours leads to the logo card (H).
+// aima_creator.js: "Tôi chỉ định làm 1 cái content thôi…", a 55-second spot for AIMA (storyboard in STORYBOARD.md;
+// the soundtrack is built by tools/make_audio.py from the same timings).
+// Part 1 (story, 0–26.3 s): a creator sits down to make ONE piece of content and loses the whole day to research,
+// trends, ideas, captions and editing. The sky in the window runs through the AIMA gradient (cyan → blue → violet →
+// magenta → night) while the creator never notices, until the clock strikes midnight: "Ủa? Hết ngày rồi?". One room,
+// one continuous camera (two time-lapse push-ins on the clock, pans, a crash zoom).
+// Part 2 (pitch, 26.3–55 s): the AIMA card, a match cut into the same room the next morning with AIMA on the screen
+// (trends, content, platforms, scheduling), and it's only 9 a.m. Then the logo card.
 (() => {
   const BR = { cyan: '#4FD9EC', blue: '#4F8CF0', violet: '#8B6CF5', magenta: '#E64FE6', purple: '#9445D6' };
   const CREATOR = { col: '#9583F2', dk: '#5D49C6', lt: '#CFC4FF' };
@@ -18,6 +21,10 @@
   const DESK = { x0: 380, x1: 1780, top: 738, edge: 770 };
   const FLOOR_Y = 985;
   const BIN = { x: 265, top: 875 };
+
+  // ---------- the cut (video time) ----------
+  const PRE = 2;                                         // the hook: the room holds this long before the story's clock starts
+  const V_PITCH = 26.3, V_AIMA = 31.3, V_END = 49.9;     // the AIMA card, the morning with AIMA, the logo card
 
   // ---------- time ----------
   // The clock creeps while the camera is elsewhere and spins during the two push-ins; the last minute clicks onto 12.
@@ -205,8 +212,8 @@
   }
 
   const handPts = (a, L, w) => [[Math.cos(a + Math.PI / 2) * w, Math.sin(a + Math.PI / 2) * w], [Math.cos(a) * L, Math.sin(a) * L], [Math.cos(a - Math.PI / 2) * w, Math.sin(a - Math.PI / 2) * w], [-Math.cos(a) * w * 1.6, -Math.sin(a) * w * 1.6]];
-  function clock(t, h, dim) {
-    const [x, y, r] = CLK, strike = spring(t, T_MIDNIGHT + .05, 4, 34), D = c => mixCol(c, NIGHT, dim * .55);
+  function clock(t, h, dim, hf, strikeT) {
+    const [x, y, r] = CLK, strike = strikeT == null ? 0 : spring(t, strikeT + .05, 4, 34), D = c => mixCol(c, NIGHT, dim * .55);
     boilSeed('clock');
     push(); translate(x, y - 40 * Math.abs(strike) * .3); rotate(.12 * strike);
     paint(ellPts(0, 0, r * 1.14, r * 1.14, 32, .8), { wash: D(BR.magenta), ink: PAL.ink, sw: .9 });
@@ -217,8 +224,8 @@
     }
     const ma = h => frac(h) * TAU - Math.PI / 2, ha = h => (h % 12) / 12 * TAU - Math.PI / 2;
     // time-lapse: ghost minute hands trail the spin
-    const speed = (hoursAt(t + .02) - hoursAt(t - .02)) / .04;
-    if (speed > 2) for (let k = 4; k >= 1; k--) paint(handPts(ma(hoursAt(t - k * .012)), r * .78, r * .05), { wash: PAL.ink, washOp: 50 * (5 - k), ink: null });
+    const speed = (hf(t + .02) - hf(t - .02)) / .04;
+    if (speed > 2) for (let k = 4; k >= 1; k--) paint(handPts(ma(hf(t - k * .012)), r * .78, r * .05), { wash: PAL.ink, washOp: 50 * (5 - k), ink: null });
     paint(handPts(ha(h), r * .5, r * .075), { wash: PAL.ink, ink: null });
     paint(handPts(ma(h), r * .78, r * .05), { wash: PAL.ink, ink: null });
     paint(ellPts(0, 0, r * .07, r * .07, 10), { wash: D(BR.magenta), ink: PAL.ink, sw: .4 });
@@ -230,7 +237,7 @@
       for (let k = 0; k <= 8; k++) { const a = a0 + k * .09; P.push([x + Math.cos(a) * r * 1.38, y + Math.sin(a) * r * 1.38]); }
       inkLine(P, .9, PAL.ink, 'ink', .5);
     }
-    const ra = t - T_MIDNIGHT;
+    const ra = strikeT == null ? -1 : t - strikeT;
     if (ra > 0 && ra < .7) for (const s of [-1, 1]) for (let i = 0; i < 3; i++) {
       boilSeed('ring' + s + i);
       const a = (s < 0 ? Math.PI : 0) + (i - 1) * .45, d0 = r * (1.3 + ra * .6), d1 = d0 + r * .35 * (1 - ra / .7);
@@ -263,17 +270,17 @@
     paint(ellPts(1185, top + 16, 20, 11, 14), { wash: '#ECE6F6', ink: PAL.ink, sw: .6 });
   }
 
-  // coffee: one mug in the morning, three by the afternoon, a stack of five at night (they change behind the clock push-ins)
+  // coffee: one mug in the morning, three by the afternoon, a stack of five at night (they change behind the clock push-ins);
+  // the last one poured still steams
   const MUGS = [[470, 0, BR.magenta], [405, 0, BR.cyan], [440, -1, BR.violet], [345, 0, BR.magenta], [520, 0, BR.cyan]];
-  function mugs(t, dim) {
-    const n = t < 6 ? 1 : t < 15.6 ? 3 : 5;
+  function mugs(t, n, steam, dim) {
     for (let i = 0; i < n; i++) {
       boilSeed('mug' + i);
       const [x, lvl, col] = MUGS[i], b = DESK.top + 14 + lvl * 52;
       inkLine([[x + 20, b - 38], [x + 34, b - 32], [x + 32, b - 16], [x + 20, b - 12]], .9, PAL.ink, 'ink', .5);
       paint(rrPts(x - 22, b - 50, 44, 50, 7), { wash: mixCol(col, NIGHT, dim), ink: PAL.ink, sw: .7 });
-      paint(ellPts(x, b - 49, 20, 5, 14), { wash: i === n - 1 && t < 6 ? '#6B4630' : mixCol(mixCol(col, PAL.ink, .5), NIGHT, dim), ink: null });
-      if (i === 0 && t < 6) for (let s = 0; s < 2; s++) {      // the first cup still steams
+      paint(ellPts(x, b - 49, 20, 5, 14), { wash: i === n - 1 && steam ? '#6B4630' : mixCol(mixCol(col, PAL.ink, .5), NIGHT, dim), ink: null });
+      if (i === n - 1 && steam) for (let s = 0; s < 2; s++) {      // the first cup still steams
         const ph = t * .9 + s * .5, P = [];
         for (let k = 0; k < 5; k++) P.push([x - 6 + s * 12 + 5 * Math.sin(ph * 4 + k * 1.3), b - 62 - k * 11 - frac(ph) * 10]);
         inkLine(P, .5, '#B8AFC4', 'inkfine', .6);
@@ -450,20 +457,19 @@
       if (k > .3) inkLine([[238, 74], [254, 92], [284, 56]].map(([x, y]) => [260 + (x - 260) * k, 74 + (y - 74) * k]), 2.2, PAL.cream, 'ink', 0);
     }
   }
-  function screen(t) {
-    push(); translate(SCR[0], SCR[1]);
-    boilSeed('screen');
+  function storyScreen(t) {
     if (t < 1.95) scrOff(t);
     else if (t < 6.0) scrResearch(t);
     else if (t < 12.42) scrTrend(t);
     else if (t < 15.6) scrCaption(t);
     else scrEdit(t);
-    pop();
   }
 
-  // ---------- shots A–G: the room ----------
-  function room(t, lt, dur) {
-    const h = hoursAt(t), dim = darkAt(h), [cx, cy, z] = camAt(t);
+  // ---------- the room, for any time of day ----------
+  // r = { h (hours), cam [cx, cy, zoom], pose, screen(t), screenOn, mugs, steam, balls, hf (hours function), strikeT }.
+  // Returns the creator's face on screen (for irises).
+  function drawRoom(t, r) {
+    const h = r.h, dim = darkAt(h), [cx, cy, z] = r.cam;
     // Night falls on the room: a wash over the wall, and another over the desk. The window, the clock and the screen
     // make their own light, and the creator only sinks halfway, lit by the screen, so the last act still reads.
     const night = y => { if (dim > .005) { boilSeed('night' + y); paint(rectPts(-400, y, W + 800, H + 800 - y), { wash: NIGHT, washOp: 255 * dim, ink: null }); } };
@@ -471,56 +477,218 @@
     wall();
     night(-400);
     windowView(t, h, dim);
-    clock(t, h, dim);
-    const p = creatorPose(t);
+    clock(t, h, dim, r.hf, r.strikeT);
+    const p = r.pose;
     LIT = dim * .45;
     if (LIT > 0) for (const f of ['col', 'dk', 'lt']) p[f] = mixCol(p[f] || CREATOR[f], NIGHT, LIT);
     clawd(CX, GY, U, { ...p, draw: headphones, boilKey: 'creator', noLegs: true, noShadow: true });   // seated behind the desk
     if (dim > .005) glow(CX + 90, GY - 190, 360, '#A9B8FF', .7 * dim);
     desk(t);
     bin(t);
-    if (t > TOSS[0] - .4) balls(t, p);
+    if (r.balls) balls(t, p);
     night(DESK.top - 3);
-    mugs(t, LIT);
-    if (t > 1.95) glow(SCR[0] + SCR[2] / 2, SCR[1] + SCR[3] / 2, 420 + 380 * dim, '#AFC2FF', .15 + 1.1 * dim);
-    screen(t);
+    mugs(t, r.mugs, r.steam, LIT);
+    if (r.screenOn) glow(SCR[0] + SCR[2] / 2, SCR[1] + SCR[3] / 2, 420 + 380 * dim, '#AFC2FF', .15 + 1.1 * dim);
+    push(); translate(SCR[0], SCR[1]); boilSeed('screen'); r.screen(t); pop();
     const face = toScreen(CX, GY - 6 * U);
     camEnd();
-    // the punchline, after the take
-    if (t > 21.2) letter('Ủa?', 1190, 150, 210, BR.magenta, { screen: true, pop: (t - 21.2) * 4, rot: -.07 + .02 * Math.sin(t * 3), stroke: PAL.cream, font: '800 210px "Baloo 2"' });
-    if (t > 21.75) letter('Hết ngày rồi?', 1215, 312, 112, BR.violet, { screen: true, pop: (t - 21.75) * 4, rot: -.03 + .015 * Math.sin(t * 2.4 + 1), stroke: PAL.cream, font: '800 112px "Baloo 2"' });
+    return face;
+  }
+
+  // ---------- lettering: a big two-line exclamation, and captions on a painted pill ----------
+  const font = (px) => `800 ${px}px "Baloo 2"`;
+  function shout(t, t0, l1, c1, l2, c2, ox = 0, oy = 0, s2 = 112) {
+    if (t > t0) letter(l1, 1190 + ox, 150 + oy, 210, c1, { screen: true, pop: (t - t0) * 4, rot: -.07 + .02 * Math.sin(t * 3), stroke: PAL.cream, font: font(210) });
+    if (t > t0 + .55) letter(l2, 1215 + ox, 312 + oy * 1.6, s2, c2, { screen: true, pop: (t - t0 - .55) * 4, rot: -.03 + .015 * Math.sin(t * 2.4 + 1), stroke: PAL.cream, font: font(s2) });
+  }
+  // A caption pill at the bottom of the frame between t0 and t1 (screen space, after camEnd): pops in, fades out.
+  function caption(t, t0, t1, txt, col = BR.violet, size = 64, y = 985, dot = null) {
+    if (t < t0 || t > t1) return;
+    const c = letG.drawingContext; c.font = font(size);
+    const tw = c.measureText(txt).width, k = backOut(seg(t, t0, t0 + .3)), out = 1 - seg(t, t1 - .25, t1), ph = size * 1.25, pad = size * .55 + (dot ? size * .9 : 0);
+    boilSeed('cap' + txt.length);
+    push(); translate(W / 2, y); scale(k);
+    paint(rrPts(-tw / 2 - pad, -ph / 2, tw + pad + size * .55, ph, ph / 2, 1.5), { wash: PAL.cream, washOp: 255 * out, ink: out > .95 ? PAL.ink : null, sw: 1 });
+    if (dot) paint(ellPts(-tw / 2 - pad + size * .62, 0, size * .3, size * .3, 16), { wash: dot, washOp: 255 * out, ink: out > .95 ? PAL.ink : null, sw: .7 });
+    pop();
+    letter(txt, W / 2, y + size * .04, size, col, { screen: true, pop: seg(t, t0, t0 + .3), alpha: out, font: font(size) });
+  }
+
+  // ---------- part 1: the story (the room's clock starts PRE seconds in) ----------
+  function story(t, lt, dur) {
+    const rt = t - PRE;
+    const face = drawRoom(rt, { h: hoursAt(rt), cam: camAt(rt), pose: creatorPose(rt), screen: storyScreen, screenOn: rt > 1.95,
+      mugs: rt < 6 ? 1 : rt < 15.6 ? 3 : 5, steam: rt < 6, balls: rt > TOSS[0] - .4, hf: hoursAt, strikeT: T_MIDNIGHT });
+    caption(t, .75, 4.5, 'Tôi chỉ định làm 1 cái content thôi…', BR.violet, 70);   // after the iris, so it sits on the room
+    shout(rt, 21.2, 'Ủa?', BR.magenta, 'Hết ngày rồi?', BR.violet);       // the punchline, after the take
     if (lt < .8) iris(...face, lerp(0, 1500, ease(lt / .8)));
     if (lt > dur - .3) { flushLetters(); brushWipe((lt - (dur - .3)) / .6, WIPE); }
   }
 
-  // ---------- shot H: the logo ----------
+  // ---------- part 2: the next morning, with AIMA (a = time since the match cut) ----------
+  const A_HOURS = [[0, 8], [15.2, 8.97], [15.42, 9]];
+  const aHours = a => kf(a, A_HOURS);
+  const A_CAM = [[0, [1440, 530, 3.4]], [.3, [1440, 530, 3.32]], [1.1, [1120, 560, 1.34]], [3.3, [1150, 560, 1.4]], [10.9, [1150, 560, 1.44]],
+    [13.5, [1150, 560, 1.46]], [14.4, [900, 520, 1.08]], [15.62, [900, 515, 1.1]], [15.84, [880, 560, 2.2]], [18.6, [880, 560, 2.28]]];
+  const aCam = a => { const [cx, cy, z] = kf(a, A_CAM), sh = a > 15.75 ? shakeXY(a, 8 * Math.exp(-(a - 15.75) * 7)) : [0, 0]; return [cx + 6 * wob(a, .07) + sh[0], cy + 4 * wob(a, .05, .3) + sh[1], z]; };
+  const BEATS = [1.0, 3.3, 7.2, 10.9, 13.5];             // trends, content, platforms, scheduling, "all in one flow"
+  const A_KEYS = [K(0, 'happy'), K(1.55, 'excited'), K(3.55, 'starstruck'), K(8.05, 'excited'), K(11.25, 'proud'), K(13.75, 'cool'),
+    K(15.05, 'neutral'), K(15.75, 'surprised'), K(17.45, 'laugh')];
+  function aimaPose(a) {
+    const p = emotions(a, A_KEYS);
+    Object.assign(p, a < 13.55 ? { ...spinView(.125), smear: 0 } : turn(a, 13.55, 13.72, .125, 0));
+    const look = (x, y, w) => { p.lookX = lerp(p.lookX || 0, x, w); p.lookY = lerp(p.lookY || 0, y, w); };
+    for (const b of BEATS.slice(0, 4)) p.aR = lerp(p.aR ?? .2, -.95, bump(a, b - .14, b - .04, b + .06, b + .22));   // a click per feature
+    look(.8, .15, bump(a, 1.0, 1.2, 13.3, 13.5));
+    const lean = bump(a, 13.7, 14.0, 15.6, 15.75);       // leaning back, done already
+    p.rot = (p.rot || 0) - .07 * lean; p.dx = (p.dx || 0) - .4 * lean;
+    look(.4, -1, bump(a, 15.0, 15.1, 15.7, 15.76));      // ...and a glance at the clock
+    return p;
+  }
+
+  // The AIMA app: a splash with the logo, then a sidebar of four tools and the active one's panel.
+  function drawLogo(cx, cy, h, alpha = 1) {
+    if (!LOGO || h < 1) return;
+    flushBrush();
+    const w = h * LOGO.width / LOGO.height;
+    push(); tint(255, 255 * clamp(alpha)); image(LOGO, cx - w / 2, cy - h / 2, w, h); noTint(); pop();
+  }
+  const pill = (x, y, w, h, o) => paint(rrPts(x, y, w, h, Math.min(h / 2, 10)), { ink: PAL.ink, sw: .4, ...o });
+  const pop2 = (a, a0, d = .18) => backOut(seg(a, a0, a0 + d));
+  function at(x, y, k, f) { if (k <= .01) return; push(); translate(x, y); scale(k); f(); pop(); }
+  function flame(x, y, s, col) { paint([[0, -1.3], [.55, -.4], [.75, .35], [.4, .85], [0, 1], [-.4, .85], [-.75, .35], [-.45, -.25], [-.2, .15]].map(([a, b]) => [x + a * s, y + b * s]), { wash: col, ink: PAL.ink, sw: .35, curv: .5 }); }
+  function check(x, y, r, k = 1) {
+    at(x, y, k, () => { paint(ellPts(0, 0, r, r, 16), { wash: '#4ED6A0', ink: PAL.ink, sw: .4 }); inkLine([[-r * .45, 0], [-r * .1, r * .38], [r * .5, -r * .38]], Math.max(.5, r / 12), PAL.cream, 'ink', 0); });
+  }
+  function toolIcon(i, x, y, s) {
+    if (i === 0) flame(x, y, s, '#FF8A3D');
+    else if (i === 1) { paint(ellPts(x, y - s * .2, s * .7, s * .7, 14), { wash: '#FFE27A', ink: PAL.ink, sw: .35 }); paint(rectPts(x - s * .3, y + s * .45, s * .6, s * .4), { wash: '#B9B2C9', ink: null }); }
+    else if (i === 2) for (let k = 0; k < 4; k++) paint(rrPts(x - s * .9 + (k % 2) * s, y - s * .9 + Math.floor(k / 2) * s, s * .8, s * .8, 3), { wash: [BR.blue, '#111111', BR.magenta, '#555555'][k], ink: null });
+    else { paint(rrPts(x - s * .85, y - s * .7, s * 1.7, s * 1.5, 3), { wash: PAL.cream, ink: PAL.ink, sw: .35 }); paint(rectPts(x - s * .85, y - s * .7, s * 1.7, s * .45), { wash: BR.magenta, ink: null }); }
+  }
+  function scrAima(a) {
+    SCR_BG('#FBF8FF');
+    if (a < 1.15) drawLogo(SW / 2, SH / 2, 200 * (1 + .03 * a), 1 - seg(a, .95, 1.1));
+    const k = backOut(seg(a, 1.0, 1.2));
+    if (k <= .01) return;
+    push(); translate(SW / 2, SH / 2); scale(k); translate(-SW / 2, -SH / 2);
+    boilSeed('app');
+    paint(rectPts(0, 0, 64, SH), { wash: '#2B2742', ink: null });
+    const cur = BEATS.filter(b => a >= b).length - 1, active = Math.min(3, Math.max(0, cur));
+    for (let i = 0; i < 4; i++) {
+      if (i === active) pill(8, 26 + i * 64, 48, 48, { wash: [BR.cyan, BR.violet, BR.blue, BR.magenta][i], ink: null });
+      toolIcon(i, 32, 50 + i * 64, 12);
+    }
+    pop();
+    if (k < 1) return;
+    const b = a - BEATS[active];
+    boilSeed('panel' + active);
+    if (active === 0) {            // trends: matching trends rank themselves, the best one gets a check
+      squig(84, 120, 24, BR.violet, .6);
+      [.96, .82, .67, .45].forEach((pc, j) => {
+        const y = 44 + j * 60, kj = pop2(b, .12 + j * .1);
+        at(290, y + 24, kj, () => {
+          pill(-210, -24, 420, 48, { wash: j === 0 && b > 1.4 ? '#FFF0FB' : PAL.cream, ink: j === 0 && b > 1.4 ? BR.magenta : PAL.ink, sw: j === 0 && b > 1.4 ? .9 : .4 });
+          flame(-186, 0, 11, j === 0 ? '#FF6A3D' : '#FFAA5E');
+          squig(-166, 120 - j * 14, 0, TXT, .45, j);
+          pill(-20, -6, 160, 12, { wash: '#E9E3F7', ink: null });
+          const f = ease(seg(b, .35 + j * .1, 1.1 + j * .1));
+          if (f > .02) pill(-20, -6, 160 * pc * f, 12, { wash: [BR.magenta, BR.violet, BR.blue, BR.cyan][j], ink: null });
+        });
+      });
+      check(492, 68, 13, pop2(b, 1.45, .25));
+    } else if (active === 1) {     // content: idea, script and caption fill in by themselves, then a call to action
+      ['idea', 'script', 'caption'].forEach((kind, j) => {
+        const x = 80 + j * 142, kj = pop2(b, .15 + j * .3);
+        at(x + 64, 130, kj, () => {
+          pill(-64, -98, 128, 196, { wash: PAL.cream });
+          if (j === 0) toolIcon(1, 0, -70, 12);
+          else if (j === 1) { pill(-14, -84, 28, 22, { wash: '#2B2742', ink: null }); paint([[-4, -79], [-4, -67], [6, -73]], { wash: PAL.cream, ink: null }); }
+          else paint(heartPts(0, -72, 12), { wash: '#E2476E', ink: PAL.ink, sw: .35 });
+          for (let l = 0; l < 5; l++) {
+            const f = ease(seg(b, .45 + j * .3 + l * .12, .7 + j * .3 + l * .12));
+            squig(-50, (70 + 30 * hash(j * 7 + l)) * f, -36 + l * 24, j === 2 && l > 2 ? BR.blue : TXT, .45, j + l);
+          }
+        });
+      });
+      at(287, 266, pop2(b, 2.5, .25), () => { pill(-90, -15, 180, 30, { wash: BR.magenta, ink: PAL.ink }); squig(-50, 100, 0, PAL.cream, .6); });
+    } else if (active === 2) {     // platforms: one piece splits into a version for each network
+      const split = ease(seg(b, .7, 1.25));
+      const CARDS = [[150, 78, 140, 100, '#1877F2'], [150, 222, 108, 108, '#E1306C'], [292, 222, 122, 100, '#222222'], [432, 150, 96, 200, '#111111']];
+      if (split < 1) at(287, 150, pop2(b, .05) * (1 - .3 * split), () => { pill(-60, -78, 120, 156, { wash: PAL.cream }); pill(-48, -66, 96, 64, { wash: '#C5B6F5', ink: null }); squig(-44, 80, 16, TXT, .45); squig(-44, 60, 36, TXT, .45, 2); });
+      if (split > 0) CARDS.forEach(([x, y, w, h, c], i) => {
+        const cx = lerp(287, x, split), cy = lerp(150, y, split), sc = lerp(.4, 1, split);
+        at(cx, cy, sc, () => {
+          pill(-w / 2, -h / 2, w, h, { wash: PAL.cream });
+          paint(rectPts(-w / 2 + 2, -h / 2 + 2, w - 4, 16), { wash: c, ink: null });
+          if (i === 3) { paint(rectPts(-w / 2 + 2, -h / 2 + 18, 4, h - 22), { wash: BR.cyan, ink: null }); paint(rectPts(w / 2 - 6, -h / 2 + 18, 4, h - 22), { wash: BR.magenta, ink: null }); }
+          paint(rectPts(-w / 2 + 10, -h / 2 + 26, w - 20, h * .42), { wash: ['#9ADBE8', '#F3B6E4', '#E3DAF7', '#C5B6F5'][i], ink: null });
+          squig(-w / 2 + 10, w * .6, h / 2 - 22, TXT, .4, i);
+        });
+        check(x + w / 2 - 8, y - h / 2 + 8, 11, pop2(b, 1.6 + i * .15, .25));
+      });
+    } else {                       // scheduling and results: posts drop onto a calendar, the numbers climb
+      pill(78, 24, 226, 252, { wash: PAL.cream });
+      paint(rectPts(80, 26, 222, 26), { wash: BR.violet, ink: null });
+      for (let c = 0; c < 5; c++) for (let r = 0; r < 3; r++) paint(rectPts(88 + c * 42, 62 + r * 70, 38, 64), { wash: '#F1ECFA', ink: null });
+      for (let i = 0; i < 9; i++) {
+        const c = (i * 2) % 5, r = Math.floor(i * 2 / 5) % 3, ki = seg(b, .2 + i * .09, .45 + i * .09);
+        if (ki <= 0) continue;
+        pill(91 + c * 42, 70 + r * 70 - 30 * (1 - easeOut(ki)), 32, 26, { wash: [BR.cyan, BR.magenta, BR.blue][i % 3], ink: PAL.ink, sw: .35 });
+      }
+      pill(318, 24, 186, 252, { wash: PAL.cream });
+      for (let i = 0; i < 5; i++) {
+        const hgt = (40 + i * 34) * ease(seg(b, .9 + i * .08, 1.4 + i * .08));
+        if (hgt > 2) paint(rectPts(334 + i * 32, 252 - hgt, 22, hgt), { wash: i === 4 ? '#4ED6A0' : '#B9C4F7', ink: null });
+      }
+      const up = ease(seg(b, 1.5, 2.0));
+      if (up > .05) inkLine([[340, 220], [380, 190], [420, 196], [460, 140 - 40 * up]].slice(0, 2 + Math.round(up * 2)), 1, '#2EA77A', 'ink', .3);
+      check(480, 50, 13, pop2(b, 2.1, .25));
+    }
+  }
+
+  function aimaMorning(t, lt, dur) {
+    const a = lt;
+    drawRoom(a, { h: aHours(a), cam: aCam(a), pose: aimaPose(a), screen: scrAima, screenOn: true, mugs: 1, steam: true, balls: false, hf: aHours, strikeT: null });
+    const B = BEATS;
+    caption(a, B[0] + .1, B[1] - .05, 'Bắt trend tự động theo ngành hàng', BR.violet, 62, 985, BR.cyan);
+    caption(a, B[1] + .1, B[2] - .05, 'Ý tưởng · Kịch bản · Caption · Hashtag', BR.violet, 62, 985, BR.violet);
+    caption(a, B[2] + .1, B[3] - .05, 'Facebook · TikTok · Instagram · Threads', BR.violet, 62, 985, BR.blue);
+    caption(a, B[3] + .1, B[4] - .05, 'Lên lịch · Tự đăng bài · Đo hiệu quả', BR.violet, 62, 985, BR.magenta);
+    caption(a, B[4] + .1, 15.5, 'Tất cả trong một luồng làm việc', BR.magenta, 66);
+    shout(a, 16.05, 'Ơ…', BR.blue, 'Mới 9 giờ sáng?', BR.violet, 190, -40, 100);   // the rhyme with "Ủa? Hết ngày rồi?" (higher: the take stretches the head up)
+    if (lt > dur - .3) { flushLetters(); brushWipe((lt - (dur - .3)) / .6, WIPE2); }
+  }
+
+  // ---------- the logo cards ----------
   let LOGO = null;
   (window.PRELOAD ||= []).push(async () => {
     LOGO = await loadImage(AIMA_LOGO);
-    await document.fonts.load('800 100px "Baloo 2"', 'Ủa? Hết ngày rồi?');
+    await document.fonts.load(font(100), 'Tôi chỉ định làm 1 cái content thôi… Ủa? Hết ngày rồi? Ơ… Mới 9 giờ sáng? Bắt trend tự động theo ngành hàng · Ý tưởng Kịch bản Lên lịch Tự đăng bài Đo hiệu quả Tất cả trong một luồng làm việc Trợ lý AI Làm nhẹ tênh doanh nghiệp nhỏ');
   });
-  function card(t, lt, dur) {
-    // soft brand-coloured washes drifting at the edges of the paper
+  const WIPE2 = [BR.cyan, BR.blue];
+  // lines: [[text, y, size, colour, appears at]]; grow: the logo swells toward the camera at the end (the match cut)
+  function logoCard(lt, dur, o) {
     [[BR.cyan, 260, 820, 420], [BR.magenta, 1680, 260, 460], [BR.violet, 1600, 960, 300], [BR.blue, 300, 150, 260]].forEach(([c, x, y, r], i) => {
       boilSeed('blob' + i);
       paint(ellPts(x + 20 * wob(lt, .15, i * .3), y + 14 * wob(lt, .12, i * .7), r, r * .8, 26, 6), { wash: mixCol(c, PAL.paper, .78), ink: null });
     });
-    const k = seg(lt, .25, .85), s = backOut(k), lh = 640 * s;
-    if (LOGO && k > 0) {
-      flushBrush();
-      const lw = lh * LOGO.width / LOGO.height, cy = H / 2 + 8 * wob(lt, .35);
-      push(); tint(255, 255 * clamp(k * 3)); image(LOGO, W / 2 - lw / 2, cy - lh / 2, lw, lh); noTint(); pop();
-    }
-    // sparkles around it, in the brand colours
-    [[620, 300, BR.cyan], [1310, 250, BR.magenta], [1350, 720, BR.violet], [580, 760, BR.blue], [1440, 480, BR.purple]].forEach(([x, y, c], i) => {
+    const k = seg(lt, .25, .85), g = o.grow ? ease(seg(lt, dur - .5, dur)) : 0;
+    if (k > 0) drawLogo(W / 2, lerp(o.logoY, H / 2, g) + 8 * wob(lt, .35) * (1 - g), lerp(o.logoH * backOut(k), 680, g), clamp(k * 3));
+    [[620, 260, BR.cyan], [1310, 220, BR.magenta], [1380, 640, BR.violet], [560, 680, BR.blue], [1440, 420, BR.purple]].forEach(([x, y, c], i) => {
       const a = lt - (.8 + i * .12); if (a < 0) return;
       boilSeed('spark' + i);
-      const r = 26 * backOut(seg(a, 0, .3)) * (1 + .18 * Math.sin(lt * 5 + i * 2));
-      paint(starPts(x, y, r, .32, 4, a * .5), { wash: c, ink: PAL.ink, sw: .5 });
+      const r = 26 * backOut(seg(a, 0, .3)) * (1 + .18 * Math.sin(lt * 5 + i * 2)) * (1 - g);
+      if (r > 1) paint(starPts(x, y, r, .32, 4, a * .5), { wash: c, ink: PAL.ink, sw: .5 });
     });
-    if (lt < .3) brushWipe(.5 + lt / .6, WIPE);
-    if (lt > dur - .7) flash(ease(seg(lt, dur - .7, dur - .05)), PAL.paper);
+    for (const [txt, y, size, col, t0] of o.lines) if (lt > t0) letter(txt, W / 2, y, size, col, { screen: true, pop: (lt - t0) * 3.5, alpha: Math.max(0, 1 - g * 1.6), stroke: PAL.cream, font: font(size) });
+    if (lt < .3) brushWipe(.5 + lt / .6, o.wipe);
+    if (o.fade && lt > dur - .7) { flushLetters(); flash(ease(seg(lt, dur - .7, dur - .05)), PAL.paper); }
   }
+  const pitchCard = (t, lt, dur) => logoCard(lt, dur, { wipe: WIPE, logoY: 450, logoH: 520, grow: true, lines: [
+    ['Trợ lý AI cho Content Marketing', 820, 76, BR.violet, 2.15], ['AI Content Marketing Co-pilot', 905, 44, '#6A5C8E', 2.6]] });
+  const endCard = (t, lt, dur) => logoCard(lt, dur, { wipe: WIPE2, logoY: 440, logoH: 500, fade: true, lines: [
+    ['Làm content, nhẹ tênh.', 815, 92, BR.magenta, 1.5], ['Trợ lý AI cho creator & doanh nghiệp nhỏ', 910, 46, '#6A5C8E', 2.2]] });
 
-  shots([[0, room], [23.5, card]]);
+  shots([[0, story], [V_PITCH, pitchCard], [V_AIMA, aimaMorning], [V_END, endCard]]);
 })();
