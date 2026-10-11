@@ -1,7 +1,7 @@
 // scene.js: AIMA #1, TikTok Awareness: "Tôi chỉ định làm 1 cái content thôi…" (context/aima/campaign.md, TikTok 1;
 // storyboard in STORYBOARD.md; the soundtrack is built by audio/make_audio.py from the same timings). Vertical.
-// A creator sits down to make ONE piece of content and loses the whole day to research, trends, ideas, captions and
-// editing. The sky in the window runs through the AIMA gradient (cyan → blue → violet → magenta → night) while the
+// "Hôm nay làm đúng một cái content thôi. Ba mươi phút là xong!" A creator sits down to make ONE piece of content and
+// loses the whole day to research, trends, ideas, captions and editing ("tí thôi" every time). The sky in the window runs through the AIMA gradient (cyan → blue → violet → magenta → night) while the
 // creator never notices, until the clock strikes midnight: "Ủa? Hết ngày rồi?". One room (the series set, ../_aima),
 // one continuous camera (two time-lapse push-ins on the clock, a pan to the bin, a crash zoom). Then the series'
 // outro: a question to the viewer and the small logo. An Awareness post: no product pitch.
@@ -16,7 +16,7 @@
 
   // ---------- time ----------
   // The clock creeps while the camera is elsewhere and spins during the two push-ins; the last minute clicks onto 12.
-  const HOURS = [[0, 8], [5.8, 9], [6.3, 12.5], [9.4, 13.5], [9.9, 14.5], [12.3, 15.5], [12.6, 16.5], [15.4, 17.5], [15.9, 22.5], [18.6, 23.82], [19.85, 23.917]];
+  const HOURS = [[0, 8], [5.8, 8.08], [6.3, 11.5], [9.4, 12.5], [9.9, 13.5], [12.3, 15.5], [12.6, 16.5], [15.4, 17.5], [15.9, 22.5], [18.6, 23.82], [19.85, 23.917]];
   const T_MIDNIGHT = 19.9;
   const hoursAt = t => t < T_MIDNIGHT ? kf(t, HOURS) : lerp(23.917, 24, backOut(seg(t, T_MIDNIGHT, T_MIDNIGHT + .14)));
 
@@ -37,8 +37,8 @@
   }
 
   // ---------- the creator ----------
-  const KEYS = [K(0, 'hopeful'), K(.95, 'determined'), K(2.25, 'excited'), K(3.25, 'thinking'), K(4.8, 'dizzy'), K(6.0, 'neutral'),
-    K(7.75, 'starstruck'), K(8.75, 'sad'), K(9.8, 'thinking'), K(11.6, 'idea'), K(12.55, 'determined'), K(13.8, 'angry'),
+  const KEYS = [K(-3.8, 'hopeful'), K(-2.0, 'determined'), K(2.25, 'excited'), K(3.25, 'thinking'), K(4.8, 'dizzy'), K(6.0, 'neutral'),
+    K(7.75, 'starstruck'), K(8.75, 'sad'), K(9.8, 'thinking'), K(11.95, 'idea'), K(12.55, 'determined'), K(13.64, 'disgusted'), K(13.8, 'angry'),
     K(14.35, 'determined'), K(15.6, 'sleepy'), K(18.4, 'relieved'), K(19.45, 'neutral'), K(20.5, 'surprised'), K(21.15, 'confused', { emote: null })];
   // drawn turns: [t0, t1, from, to] in turns (0 = facing us, .125 = 3/4 toward the laptop)
   const TURNS = [[1.6, 1.78, 0, .125], [9.6, 9.78, .125, 0], [12.3, 12.46, 0, .125], [20.45, 20.58, .125, 0]];
@@ -268,8 +268,8 @@
     const rt = STW(t);
     const face = AIMA.room(rt, { ct: t, h: hoursAt(rt), cam: camAt(rt, t), pose: creatorPose(rt, t), screen: storyScreen, screenOn: rt > 1.95,
       mugs: rt < 6 ? 1 : rt < 15.6 ? 3 : 5, steam: rt < 6, after: balls, hf: hoursAt, strikeT: T_MIDNIGHT });
-    AIMA.caption(t, .75, 4.6, 'Tôi chỉ định làm 1 cái content thôi…', BR.violet, 60);   // the hook, after the iris
-    AIMA.shout(rt, 21.2, 'Ủa?', BR.magenta, 'Hết ngày rồi?', BR.violet, { y: 300 });     // the punchline, after the take
+    AIMA.caption(t, .75, 5.0, 'Tôi chỉ định làm 1 cái content thôi…', BR.violet, 60);   // the hook, after the iris
+    AIMA.shout(rt, 21.2, 'Ủa?', BR.magenta, 'Hết ngày rồi?', BR.violet, { y: 300, gap: .6 });     // the punchline, after the take
     if (lt < .8) iris(...face, lerp(0, 2100, ease(lt / .8)));
     if (lt > dur - .3) { flushLetters(); brushWipe((lt - (dur - .3)) / .6, [BR.violet, BR.magenta]); }
   }

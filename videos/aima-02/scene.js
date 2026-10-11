@@ -9,6 +9,8 @@
   const { BR, TXT, SW, SH, bump, K, squig, SCR_BG } = AIMA;
   const T = TIMING;
   const LID_ON = T.lid[1];
+  // STW maps video time onto event time (the times in TIMING and below); the outro starts when the story ends
+  const STW = warp(T.story.rates, T.story.end), V_OUTRO = STW.len;
 
   // ---------- time of day: 8:00, the clock spins through the morning on the push-in and again on the pull-out ----------
   const HOURS = [[0, 8], [T.clockPush, 8.7], [T.clockPush + .45, 9], [T.clockPush + .9, 11.5], [T.pullOut, 13.2], [T.pullOut + .8, 16.4]];
@@ -21,20 +23,22 @@
     [T.clockPush, DESKV(1.25)],
     [T.clockPush + .45, CLOCKV(3.0)], [T.clockPush + .9, CLOCKV(3.06)], [T.clockPush + 1.35, DESKV(1.28)],            // the morning flies by
     [T.pullOut, DESKV(1.36)], [T.pullOut + .8, [540, 900, 1.06]], [T.crash - .17, [540, 895, 1.08]],                    // pull back: afternoon
-    [T.crash, [385, 1060, 1.8]], [T.outro, [385, 1060, 1.86]],                                                         // crash zoom
+    [T.crash, [385, 1060, 1.8]], [T.story.end, [385, 1060, 1.86]],                                                         // crash zoom
   ];
-  function camAt(t) {
-    const [cx, cy, z] = kf(t, CAMK), sh = t > T.crash ? shakeXY(t, 12 * Math.exp(-(t - T.crash) * 6)) : [0, 0];
-    return [cx + 6 * wob(t, .07) + sh[0], cy + 4 * wob(t, .05, .3) + sh[1], z];
+  const CAMK_V = STW.keys(CAMK);
+  function camAt(t, ct) {                                // t: event time, ct: video time
+    const [cx, cy, z] = kf(ct, CAMK_V), sh = t > T.crash ? shakeXY(t, 12 * Math.exp(-(t - T.crash) * 6)) : [0, 0];
+    return [cx + 6 * wob(ct, .07) + sh[0], cy + 4 * wob(ct, .05, .3) + sh[1], z];
   }
 
   // ---------- the creator ----------
   const KEYS = [K(0, 'hopeful'), K(.9, 'determined'), K(3.9, 'excited'), K(4.9, 'thinking'), K(7.65, 'happy'), K(8.4, 'thinking'),
     K(9.75, 'happy'), K(10.3, 'starstruck'), K(12.4, 'surprised'), K(13.0, 'nervous'), K(16.2, 'determined'), K(19.1, 'thinking'),
     K(20.6, 'determined'), K(21.8, 'angry'), K(23.4, 'determined'), K(24.0, 'sad'), K(25.95, 'neutral'), K(T.crash, 'confused')];
+  const KEYS_V = STW.keys(KEYS);
   const TURNS = [[3.05, 3.22, 0, .125], [25.75, 25.92, .125, 0]];   // to the laptop, and back to us
-  function creatorPose(t) {
-    const p = emotions(t, KEYS);
+  function creatorPose(t, ct) {                          // t: event time, ct: video time (idles and blinks run on it)
+    const p = emotions(ct, KEYS_V);
     let tv = { ...spinView(0), smear: 0 };
     for (const [a, b, h0, h1] of TURNS) if (t >= a) tv = turn(t, a, b, h0, h1);
     Object.assign(p, tv);
@@ -170,14 +174,15 @@
 
   // ---------- the shots ----------
   function story(t, lt, dur) {
-    const face = AIMA.room(t, { h: hoursAt(t), cam: camAt(t), pose: creatorPose(t), screen, screenOn: t > LID_ON, lid: ease(seg(t, T.lid[0], T.lid[1])),
-      mugs: t < T.clockPush + .45 ? 1 : 2, steam: true, hf: hoursAt });
+    const et = STW(t);
+    const face = AIMA.room(et, { ct: t, h: hoursAt(et), cam: camAt(et, t), pose: creatorPose(et, t), screen, screenOn: et > LID_ON, lid: ease(seg(et, T.lid[0], T.lid[1])),
+      mugs: et < T.clockPush + .45 ? 1 : 2, steam: true, hf: hoursAt });
     AIMA.caption(t, .6, 4.4, 'Mở laptop ra… và không biết đăng gì.', BR.violet, 60);      // the hook: the post's title
-    AIMA.shout(t, T.punch[0], 'Rồi…', BR.violet, 'Rốt cuộc đăng gì đây?', BR.magenta, { y: 300, gap: T.punch[1] - T.punch[0] });
+    AIMA.shout(et, T.punch[0], 'Rồi…', BR.violet, 'Rốt cuộc đăng gì đây?', BR.magenta, { y: 300, gap: T.punch[1] - T.punch[0] });
     if (lt < .8) iris(...face, lerp(0, 2100, ease(lt / .8)));
     if (lt > dur - .3) { flushLetters(); brushWipe((lt - (dur - .3)) / .6, [BR.violet, BR.magenta]); }
   }
   const ending = (t, lt, dur) => AIMA.outro(t, lt, dur, { q: ['Có ai cũng từng', 'bị đứng hình như vậy không?'], feel: 'shy' });
 
-  shots([[0, story], [T.outro, ending]]);
+  shots([[0, story], [V_OUTRO, ending]]);
 })();

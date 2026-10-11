@@ -10,6 +10,9 @@ from audiokit import *
 
 PROJECT, T = load_video(VDIR)
 DUR = PROJECT['duration']
+SW = warp(T['story']['rates'], T['story']['end'])
+S = SW.inv                              # event time (the times in TIMING) → video time
+V_OUTRO = SW.len                        # the question to the viewer and the logo
 music, sfx, vo = buffers(DUR)
 OUT = os.path.join(VDIR, 'audio/soundtrack.m4a')
 
@@ -40,49 +43,49 @@ def bright_loop(t0, t1):
         add(music, tb, kick(.5))
 
 lofi_section(0, 2, drums=False, vel=.7)
-lofi_section(2, T['crash'])
+lofi_section(2, S(T['crash']))
 # the record stops on the crash zoom; silence under the punchline, until the outro
-i0, i1 = int(T['crash'] * SR), int((T['outro'] - .9) * SR)
+i0, i1 = int(S(T['crash']) * SR), int((V_OUTRO - .9) * SR)
 music[i0:i0 + 2400] *= np.linspace(1, 0, 2400)[:, None]; music[i0 + 2400:i1] = 0
-bright_loop(T['outro'], DUR)
-add(music, T['outro'] + .1, pad([hz(n) for n in ['C3', 'G3', 'C4', 'E4']], DUR - T['outro'], 2000, .6))
+bright_loop(V_OUTRO, DUR)
+add(music, V_OUTRO + .1, pad([hz(n) for n in ['C3', 'G3', 'C4', 'E4']], DUR - V_OUTRO, 2000, .6))
 
 # ---------- sound effects on the picture ----------
-L0, L1 = T['lid']
+L0, L1 = S(T['lid'][0]), S(T['lid'][1])
 add(sfx, .05, whoosh(.8, .5))                                             # iris opens
 add(sfx, .6, pop(700, .6))                                                # the title caption
 add(sfx, L0, slide(500, 900, L1 - L0, .35), pan=.4)                       # the lid lifts
 add(sfx, L1, blip(.7), pan=.4)                                            # the screen wakes
-for i, s in enumerate(T['swipes']): add(sfx, s, whoosh(.22 if i < 2 else .16, .45), pan=.4)    # swipe up
-for i, s in enumerate(T['saves']):                                        # tap: saved, a little higher each time
+for i, s in enumerate(T['swipes']): add(sfx, S(s), whoosh(.22 if i < 2 else .16, .45), pan=.4)    # swipe up
+for i, s in enumerate(map(S, T['saves'])):                                # tap: saved, a little higher each time
     add(sfx, s - .02, click(.8), pan=.35); add(sfx, s, pop(700 + 45 * i, .55), pan=.4)
-add(sfx, T['saves'][0] + .02, bell(hz('E6'), .5, .4), pan=.4); add(sfx, T['saves'][1] + .02, bell(hz('G6'), .5, .4), pan=.4)
-for i in range(18): add(sfx, T['savedView'] + i * .025, pop(900 + 25 * i, .25), pan=.4)       # the grid fills
-for i in range(16): add(sfx, T['savedView'] + .5 + i * .035, pop(500 + 40 * i, .4), pan=.4 + .2 * np.sin(i))   # ...and spills
-add(sfx, T['savedView'] + .1, boing(260, .6, .8))                         # surprise
-P = T['clockPush']                                                        # the push-in on the clock: in, ticking flies, out
+add(sfx, S(T['saves'][0]) + .02, bell(hz('E6'), .5, .4), pan=.4); add(sfx, S(T['saves'][1]) + .02, bell(hz('G6'), .5, .4), pan=.4)
+for i in range(18): add(sfx, S(T['savedView']) + i * .025, pop(900 + 25 * i, .25), pan=.4)       # the grid fills
+for i in range(16): add(sfx, S(T['savedView']) + .5 + i * .035, pop(500 + 40 * i, .4), pan=.4 + .2 * np.sin(i))   # ...and spills
+add(sfx, S(T['savedView']) + .1, boing(260, .6, .8))                         # surprise
+P = S(T['clockPush'])                                                        # the push-in on the clock: in, ticking flies, out
 add(sfx, P, whoosh(.45, .8))
 for k in range(18): add(sfx, P + .45 + k * .025, tick(.55, 2400 + 300 * (k % 2)))
 add(sfx, P + .9, whoosh(.45, .7, rise=False))
-add(sfx, T['notesOpen'], pop(650, .5), pan=.4)                            # the notes app
-for (a, b), (d0, d1) in zip(T['type'], T['del']):
+add(sfx, S(T['notesOpen']), pop(650, .5), pan=.4)                            # the notes app
+for (a, b), (d0, d1) in zip([map(S, x) for x in T['type']], [list(map(S, x)) for x in T['del']]):
     typing(sfx, a, b, 15)                                                 # typing...
     typing(sfx, d0, d1, 30, .6); add(sfx, d0, slide(900, 300, d1 - d0 + .1, .35), pan=.4)   # ...deleting
-add(sfx, 21.8, hiss(.8, .6))                                              # fuming
-add(sfx, T['pullOut'], whoosh(.8, .4, rise=False))                        # pull back: the afternoon, the clock spins
-for k in range(24): add(sfx, T['pullOut'] + .1 + k * .028, tick(.4, 2200 + 300 * (k % 2)))
-add(sfx, T['crash'] - .08, whoosh(.18, .9)); add(sfx, T['crash'], scratch(1.0)); add(sfx, T['crash'], boing(330, .5, .6))
-add(sfx, T['punch'][0], pop(520, .7)); add(sfx, T['punch'][1], pop(640, .6))   # "Rồi…" "Rốt cuộc đăng gì đây?"
-add(sfx, T['outro'] - .9, riser(.9, .4))                                  # into the outro
-add(sfx, T['outro'] - .3, whoosh(.6, .7))                                 # brush wipe
-add(sfx, T['outro'] + .35, pop(600, .55)); add(sfx, T['outro'] + .6, pop(760, .45))   # the question
-add(sfx, T['outro'] + 1.3, sparkle(.7))                                   # the logo
+add(sfx, S(21.8), hiss(.8, .6))                                              # fuming
+add(sfx, S(T['pullOut']), whoosh(S(T['pullOut'] + .8) - S(T['pullOut']), .4, rise=False))                        # pull back: the afternoon, the clock spins
+for k in range(24): add(sfx, S(T['pullOut']) + .1 + k * .028, tick(.4, 2200 + 300 * (k % 2)))
+add(sfx, S(T['crash']) - .08, whoosh(.18, .9)); add(sfx, S(T['crash']), scratch(1.0)); add(sfx, S(T['crash']), boing(330, .5, .6))
+add(sfx, S(T['punch'][0]), pop(520, .7)); add(sfx, S(T['punch'][1]), pop(640, .6))   # "Rồi…" "Rốt cuộc đăng gì đây?"
+add(sfx, V_OUTRO - .9, riser(.9, .4))                                  # into the outro
+add(sfx, V_OUTRO - .3, whoosh(.6, .7))                                 # brush wipe
+add(sfx, V_OUTRO + .35, pop(600, .55)); add(sfx, V_OUTRO + .6, pop(760, .45))   # the question
+add(sfx, V_OUTRO + 1.3, sparkle(.7))                                   # the logo
 
 # ---------- voice-over ----------
 print('voice-over:')
-place_vo(vo, VDIR, [
-    ('d_hook', .9), ('d_scroll', 4.9), ('d_save1', 6.62), ('d_save2', 8.4), ('d_saved', T['savedView'] + .6),
-    ('d_notes', T['clockPush'] + 1.3), ('d_del1', T['type'][0][1] + .2), ('d_del2', T['type'][1][1] + .2),
-    ('d_punch1', T['punch'][0]), ('d_punch2', T['punch'][1]), ('d_ask', T['outro'] + .45)])
+place_vo(vo, VDIR, [                    # video time: each line is placed so its last word lands on the tap it names
+    ('d_hook', .9), ('d_scroll', 5.0), ('d_save1', 6.9), ('d_save2', 9.35), ('d_saved', 14.4),
+    ('d_notes', 18.4), ('d_del1', 22.3), ('d_del2', 25.5),
+    ('d_punch1', S(T['punch'][0])), ('d_punch2', S(T['punch'][1])), ('d_ask', V_OUTRO + .45)])
 
 mixdown(music, sfx, vo, OUT)

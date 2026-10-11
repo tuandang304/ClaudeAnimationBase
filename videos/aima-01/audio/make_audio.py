@@ -93,7 +93,7 @@ for i, ti in enumerate([10.4, 10.9, 11.4]):                                     
     add(sfx, S(ti), whoosh(.3, .45), pan=-.5)
     if i == 1: add(sfx, S(ti + .48), clang(.8), pan=-.7); add(sfx, S(ti + .88), thud(.8), pan=-.6)
     else: add(sfx, S(ti + .48), thunk(.8), pan=-.7)
-add(sfx, S(11.6), bell(hz('G6'), 1.2, .9))                                            # idea!
+add(sfx, S(11.95), bell(hz('G6'), 1.2, .9))                                            # idea!
 add(sfx, S(12.3), whoosh(.3, .7))                                                     # whip back to the desk
 add(sfx, S(12.42), pop(650, .5), pan=.4)                                              # the doc opens
 typing(sfx, S(12.7), S(13.62)); typing(sfx, S(13.7), S(14.0), 26, .6); typing(sfx, S(14.4), S(15.05), 20)
@@ -113,8 +113,9 @@ add(sfx, V_OUTRO + 1.3, sparkle(.7))                                            
 # Each line sits on the acting beat it belongs to; the question starts as its words pop in.
 print('voice-over:')
 place_vo(vo, VDIR, [
-    ('c_hook', .45), ('c_research', S(3.3)), ('c_trend', S(7.62)), ('c_trend2', S(8.7)), ('c_idea', S(9.88)), ('c_idea2', S(11.68)),
-    ('c_caption', S(13.75)), ('c_edit', S(16.3)), ('c_done', S(18.5)), ('c_punch1', S(21.2)), ('c_punch2', S(21.8)),
-    ('c_ask', V_OUTRO + .45)])
+    ('c_hook', .5), ('c_research', S(3.3)), ('c_trend', S(7.62)), ('c_trend2', S(8.72)),
+    ('c_idea', S(9.92)), ('c_no1', S(10.48)), ('c_no2', S(10.98)), ('c_no3', S(11.48)), ('c_idea2', S(11.97)),
+    ('c_caption', S(12.75)), ('c_caption2', S(14.1)), ('c_edit', S(16.4)), ('c_done', S(18.33)),
+    ('c_punch1', S(21.2)), ('c_punch2', S(21.8)), ('c_ask', V_OUTRO + .45)])
 
 mixdown(music, sfx, vo, OUT)

@@ -196,7 +196,7 @@ def load_vo(vdir, name):
     return np.frombuffer(raw, np.int16).astype(float) / 32768
 
 
-def place_vo(vo, vdir, cues, gap=.25):
+def place_vo(vo, vdir, cues, gap=.6):
     """Adds each (name, t) clip to vo and prints the cue sheet, flagging lines that start less than `gap` s after the last ends."""
     end = -1
     for name, t in sorted(cues, key=lambda c: c[1]):

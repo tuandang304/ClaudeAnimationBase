@@ -2,7 +2,7 @@
 
 Bài **TikTok 2 · Awareness** trong [kế hoạch truyền thông](../../context/aima/campaign.md): POV / skit. "Nhân vật mở
 laptop với quyết tâm làm content → lướt TikTok tìm trend → lưu hàng loạt video → mở Notes → viết rồi xoá → vẫn không biết
-bắt đầu từ đâu." Không giới thiệu sản phẩm; chỉ có logo nhỏ ký tên kênh ở cuối. Video dọc 1080×1920, 24 fps, 120 bpm, 34.2 s.
+bắt đầu từ đâu." Không giới thiệu sản phẩm; chỉ có logo nhỏ ký tên kênh ở cuối. Video dọc 1080×1920, 24 fps, 120 bpm, 39.4 s.
 
 **Logline:** Hôm nay nhất định phải đăng một content, nhưng lướt để tìm trend thì lưu cả chục video, mở ghi chú thì viết
 rồi xoá, và khi ngẩng lên đã là buổi chiều: "Rồi… rốt cuộc đăng gì đây?"
@@ -14,7 +14,8 @@ chú vẫn trắng.
 **Motif:** cái khay "đã lưu" đầy dần (lưu nhiều mà không dùng), đối lập với trang ghi chú trống trơn. Đồng hồ quay hai
 lần: một lần khi camera lao vào, một lần ngay trong khung rộng khi kéo ra (lần này creator cũng thấy).
 
-**Shots** (giờ của video; mọi mốc nằm trong `TIMING` ở [video.js](video.js), âm thanh dùng chung):
+**Shots.** Các giờ dưới đây là *giờ sự kiện* trong `TIMING` ở [video.js](video.js); `TIMING.story` ghim chúng vào giờ video
+(bảng lời thoại bên dưới) sao cho mỗi "lưu!", "xoá" rơi đúng lúc bấm và mỗi câu có chỗ thở. Âm thanh dùng chung bảng đó.
 
 ```
 A  0–4.4     [iris mở]  Caption tiêu đề "Mở laptop ra… và không biết đăng gì." Creator quyết tâm (giọng: "Hôm nay nhất
@@ -34,18 +35,18 @@ OUTRO 29.6–34.2 [brush wipe]  Creator giơ tay hỏi: "Có ai cũng từng b�
              hoạch truyền thông), rồi logo AIMA nhỏ.
 ```
 
-## Lời thoại (giọng creator, Ngọc Huyền)
+## Lời thoại (giọng creator: Thái Sơn; giờ video)
 
-| id | câu | lúc (video) |
+| id | câu | lúc |
 |---|---|---|
 | d_hook | Hôm nay nhất định phải đăng một cái content! | 0.9 |
-| d_scroll | Lướt tìm trend tí đã… | 4.9 |
-| d_save1 / d_save2 | Cái này hay… lưu! / Cái này cũng hay… lưu luôn! | 6.62 / 8.4 |
-| d_saved | Ơ… lưu ba chục cái rồi à? | 12.9 |
-| d_notes | Thôi, mở ghi chú viết luôn! | 16.2 |
-| d_del1 / d_del2 | Không ổn… xoá. / Cũng không được… xoá! | 19.2 / 21.9 |
-| d_punch1 / d_punch2 | Rồi… / Rốt cuộc là đăng gì đây? | 26.5 / 27.3 |
-| d_ask | Có ai cũng từng bị đứng hình như vậy không? | 30.05 |
+| d_scroll | Lướt tìm trend tí đã… | 5.0 |
+| d_save1 / d_save2 | Cái này hay… lưu! / Cái này cũng hay… lưu luôn! | 6.9 / 9.35 |
+| d_saved | Ơ… lưu ba chục cái rồi à? | 14.4 |
+| d_notes | Thôi, mở ghi chú viết luôn! | 18.4 |
+| d_del1 / d_del2 | Không ổn… xoá. / Cũng không được… xoá! | 22.3 / 25.5 |
+| d_punch1 / d_punch2 | Rồi… / Rốt cuộc là đăng gì đây? | 30.8 / 31.9 |
+| d_ask | Có ai cũng từng bị đứng hình như vậy không? | 35.05 |
 
 **Chữ trên hình:** caption tiêu đề, "Rồi…" / "Rốt cuộc đăng gì đây?", câu hỏi cuối và logo. Feed, khay lưu, thư mục và
 ghi chú trên laptop là nét vẽ, không có chữ.

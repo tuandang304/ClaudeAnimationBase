@@ -31,11 +31,13 @@ bộ, nhưng chưa phải quy định chính thức của thương hiệu).
 
 ## Âm thanh
 
-- Giọng đọc (VieNeu-TTS, `tools/voice/voices.json`): **creator** = Ngọc Huyền (nữ, giọng Bắc, tự nhiên), **người dẫn**
-  = Hải Đăng (nam, giọng Bắc, tự nhiên). [aima-01]
+- Giọng đọc (VieNeu-TTS, `tools/voice/voices.json`): **creator** = **Thái Sơn** (nam, giọng Nam, kể chuyện). [gốc: chủ
+  dự án chọn] Người dẫn (chưa dùng ở video Awareness) = Hải Đăng (nam, giọng Bắc, tự nhiên).
+- Nhịp nói: chậm, có quãng nghỉ thật giữa các câu (0.45 s sau dấu chấm, 0.6 s sau "…") và ≥ 0.6 s giữa hai câu thoại.
+  [gốc: yêu cầu của chủ dự án]
 - Từ tiếng Anh giữ nguyên chính tả trên hình, nhưng đọc theo `tools/voice/pronunciation.tsv`: content → còn ten,
   idea → ai đia, research → rì sớt, AIMA → ai ma. [gốc: yêu cầu của chủ dự án]
-- Nhạc: lo-fi nhẹ khi kể nỗi đau, chuyển sang nhạc sáng/tươi khi AIMA xuất hiện. [aima-01]
+- Nhạc: lo-fi nhẹ khi kể nỗi đau, tắt hẳn ở cú chốt (tiếng đĩa xước), rồi một vòng nhạc sáng nhẹ dưới phần kết (câu hỏi + logo). [aima-01, aima-02]
 
 ## Tông giọng
 

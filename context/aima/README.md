@@ -36,5 +36,5 @@ giới thiệu tính năng.
 
 | video | bài trong kế hoạch | ghi chú |
 |---|---|---|
-| [videos/aima-01](../../videos/aima-01/) | TikTok 1 · Awareness · "Tôi chỉ định làm 1 cái content thôi…" | 40.3 s; kết: "Bạn mất bao lâu cho 1 cái content?" |
-| [videos/aima-02](../../videos/aima-02/) | TikTok 2 · Awareness · "Mở laptop ra… và không biết đăng gì." | 34.2 s; kết: "Có ai cũng từng bị đứng hình như vậy không?" |
+| [videos/aima-01](../../videos/aima-01/) | TikTok 1 · Awareness · "Tôi chỉ định làm 1 cái content thôi…" | 60.9 s; kịch bản "30 phút là xong" → nửa đêm; kết: "Bạn mất bao lâu cho 1 cái content?" |
+| [videos/aima-02](../../videos/aima-02/) | TikTok 2 · Awareness · "Mở laptop ra… và không biết đăng gì." | 39.4 s; kết: "Có ai cũng từng bị đứng hình như vậy không?" |
