@@ -1,6 +1,6 @@
 // core.js: constants, helpers, paper, paint wrapper, compositing and render hooks.
 // Length and rhythm come from PROJECT in the video's video.js (videos/<name>/video.js).
-const W = 1920, H = 1080;
+const [W, H] = PROJECT.size || [1920, 1080];                       // the frame: PROJECT.size, e.g. [1080, 1920] for vertical video
 const BPM = PROJECT.bpm, BEAT = 60 / BPM, OFF = PROJECT.offset || 0, BOIL = 12, DUR = PROJECT.duration;
 const TAU = Math.PI * 2;
 const PAL = {

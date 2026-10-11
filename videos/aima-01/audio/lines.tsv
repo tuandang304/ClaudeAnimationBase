@@ -11,13 +11,4 @@ c_edit	creator	Edit nốt... render nữa là xong...
 c_done	creator	Xong!
 c_punch1	creator	Ủa?
 c_punch2	creator	Hết ngày rồi?
-c_morning1	creator	Ơ...
-c_morning2	creator	Mới chín giờ sáng?
-n_1	narrator	Đừng để một cái content ngốn trọn cả ngày của bạn.
-n_2	narrator	AIMA, trợ lý AI cho content marketing.
-n_3	narrator	Tự động bắt trend theo ngành hàng.
-n_4	narrator	Gợi ý ý tưởng, viết kịch bản, caption và hashtag.
-n_5	narrator	Tối ưu riêng cho Facebook, TikTok, Instagram và Threads.
-n_6	narrator	Lên lịch, tự đăng bài và đo hiệu quả.
-n_7	narrator	Tất cả, trong một luồng làm việc.
-n_8	narrator	AIMA. Làm content, nhẹ tênh.
+c_ask	creator	Bạn mất bao lâu cho một cái content?

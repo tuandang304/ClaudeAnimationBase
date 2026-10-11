@@ -7,7 +7,7 @@
 <style>
   html, body { margin: 0; background: #1b1820; color: #eee; font: 13px system-ui, sans-serif; }
   main { padding: 12px; display: grid; gap: 8px; }
-  #out { width: min(100%, 1280px); aspect-ratio: 16 / 9; height: auto; background: #F3EBDC; }
+  #out { width: min(100%, 1280px); max-height: 88vh; object-fit: contain; height: auto; background: #F3EBDC; }
   .p5Canvas { display: none !important; }
   .bar { display: flex; gap: 10px; align-items: center; max-width: 1280px; }
   #scrub { flex: 1; }
@@ -43,6 +43,8 @@
 <script src="src/sheets.js"></script>
 <!-- the video's own scripts (PROJECT.scenes in its video.js) -->
 <script>
+  // the frame size comes from the video (PROJECT.size, default 1920 × 1080)
+  if (typeof PROJECT !== 'undefined') { const [w, h] = PROJECT.size || [1920, 1080], c = document.getElementById('out'); c.width = w; c.height = h; c.style.aspectRatio = `${w} / ${h}`; if (h > w) c.style.width = 'auto'; }
   if (typeof PROJECT === 'undefined') document.body.insertAdjacentHTML('afterbegin', `<p style="color:#f88">No video named "${VIDEO}": see the folders in videos/.</p>`);
   else for (const f of PROJECT.scenes || []) document.write(`<script src="${VIDEO_DIR}${f}"><\/script>`);
 </script>

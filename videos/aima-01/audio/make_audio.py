@@ -3,8 +3,8 @@
 # beat (120 bpm, beat 1 at 0 s), sound effects on the on-screen events, and the voice-over in audio/vo/ (made by
 # tools/make_vo.py from lines.tsv). Run from the repo root:  .venv/bin/python videos/aima-01/audio/make_audio.py
 #
-# Cues are written in the scene's EVENT time and moved onto the video's clock by the same warps the scene uses (TIMING
-# in video.js): S(rt) for the story's clock, A(a) for the morning with AIMA. Change the pacing in video.js and rerun.
+# Cues are written in the scene's EVENT time and moved onto the video's clock by the warp the scene uses (TIMING in
+# video.js): S(rt) for the story's clock. Change the pacing in video.js and rerun.
 import os, sys
 VDIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(VDIR)), 'tools'))
@@ -12,10 +12,9 @@ from audiokit import *
 
 PROJECT, TIMING = load_video(VDIR)
 DUR = PROJECT['duration']
-SW, MW = warp(TIMING['story']['rates'], TIMING['story']['end']), warp(TIMING['morning']['rates'], TIMING['morning']['end'])
-V_PITCH = SW.len; V_AIMA = V_PITCH + TIMING['pitch']; V_END = V_AIMA + MW.len
+SW = warp(TIMING['story']['rates'], TIMING['story']['end'])
+V_OUTRO = SW.len                        # the question to the viewer and the logo
 S = SW.inv                              # story time → video time
-A = lambda a: V_AIMA + MW.inv(a)        # time in the morning-with-AIMA shot → video time
 music, sfx, vo = buffers(DUR)
 OUT = os.path.join(VDIR, 'audio/soundtrack.m4a')
 
@@ -66,13 +65,11 @@ lofi_section(0, 2, drums=False, vel=.7)
 lofi_section(2, S(15.45))              # the day, up to the second push-in on the clock
 night_section(S(15.45), S(19.9))       # night: no drums, sleepy
 add(music, S(19.9), pad([hz('F3'), hz('A3'), hz('C4')], .55, 900, .7))
-bright_section(V_PITCH, V_AIMA, full=False)
-bright_section(V_AIMA, V_END)
-add(music, V_END, pad([hz(n) for n in ['C3', 'G3', 'C4', 'E4', 'D5']], DUR - V_END, 2200, 1.0))   # the last chord rings out
-for k, n in enumerate(['C4', 'E4', 'G4', 'D5']): add(music, V_END + k * .06, ep(hz(n), 4.5, .8), pan=-.3 + k * .2)
-add(music, V_END, bass(hz('C2'), 2.5))
+# the outro: a light, bright loop under the question, and the last chord rings out
+bright_section(V_OUTRO, DUR, full=False)
+add(music, V_OUTRO + .1, pad([hz(n) for n in ['C3', 'G3', 'C4', 'E4']], DUR - V_OUTRO, 2000, .6))
 # the record stops on the crash zoom: cut the music from there to the AIMA riser
-i0, i1 = int(S(20.45) * SR), int((V_PITCH - 1.4) * SR)
+i0, i1 = int(S(20.45) * SR), int((V_OUTRO - .9) * SR)
 music[i0:i0 + 2400] *= np.linspace(1, 0, 2400)[:, None]; music[i0 + 2400:i1] = 0
 
 # ---------- sound effects on the picture ----------
@@ -107,36 +104,17 @@ add(sfx, S(18.32), chime(.8), pan=.3)                                           
 add(sfx, S(19.9), tick(1.2, 2000)); add(sfx, S(19.95), bell(hz('G3'), 3.5, 1.1, dec=.9))   # midnight
 add(sfx, S(20.42), whoosh(.18, .9)); add(sfx, S(20.5), scratch(1.0)); add(sfx, S(20.5), boing(330, .5, .6))   # crash zoom, the record stops
 add(sfx, S(21.2), pop(520, .7)); add(sfx, S(21.75), pop(640, .6))                     # "Ủa?" "Hết ngày rồi?"
-add(sfx, V_PITCH - 1.4, riser(1.4, .8))                                               # into AIMA
-add(sfx, V_PITCH - .3, whoosh(.6, .8))                                                # brush wipe
-add(sfx, V_PITCH, impact(.6))
-add(sfx, V_PITCH + .3, sparkle(.9)); add(sfx, V_PITCH + 2.15, pop(600, .5)); add(sfx, V_PITCH + 2.6, pop(760, .4))
-add(sfx, V_AIMA - .5, whoosh(.5, .7))                                                 # the logo swells into the screen
-add(sfx, A(1.0), blip(.6), pan=.4)                                                    # the app opens
-for b in (1.0, 3.3, 7.2, 10.9): add(sfx, A(b - .1), click(.8), pan=.3)               # a click per tool
-for b in (1.0, 3.3, 7.2, 10.9, 13.5): add(sfx, A(b + .1), pop(560, .5))              # the captions
-for j in range(4): add(sfx, A(1.0 + .12 + j * .1), pop(700 + j * 80, .35), pan=.45)
-add(sfx, A(1.0 + 1.45), bell(hz('E6'), .8, .6), pan=.45)
-for j in range(3): add(sfx, A(3.3 + .15 + j * .3), pop(600 + j * 90, .45), pan=.45)
-add(sfx, A(3.3 + 2.5), pop(820, .5), pan=.45)
-add(sfx, A(7.2 + .7), whoosh(.5, .5), pan=.45)
-for i in range(4): add(sfx, A(7.2 + 1.6 + i * .15), bell(hz(['C6', 'E6', 'G6', 'C7'][i]), .6, .45), pan=.45)
-for i in range(9): add(sfx, A(10.9 + .2 + i * .09), tick(.35, 1800 + 120 * i), pan=.45)
-add(sfx, A(10.9 + 2.1), chime(.6), pan=.45)
-add(sfx, A(13.5), whoosh(A(14.4) - A(13.5), .35, rise=False))                       # pull out
-add(sfx, A(15.72), whoosh(.15, .7)); add(sfx, A(15.75), boing(300, .5, .7))          # 9 a.m.?!
-add(sfx, A(16.05), pop(520, .7)); add(sfx, A(16.6), pop(640, .6))
-add(sfx, V_END - .3, whoosh(.6, .8))
-add(sfx, V_END + .3, sparkle(1.0)); add(sfx, V_END + 1.5, pop(600, .5)); add(sfx, V_END + 2.2, pop(760, .4))
+add(sfx, V_OUTRO - .9, riser(.9, .4))                                                 # into the outro
+add(sfx, V_OUTRO - .3, whoosh(.6, .7))                                                # brush wipe
+add(sfx, V_OUTRO + .35, pop(600, .55)); add(sfx, V_OUTRO + .6, pop(760, .45))         # the question
+add(sfx, V_OUTRO + 1.3, sparkle(.7))                                                  # the logo
 
 # ---------- voice-over ----------
-# Creator lines sit on the acting beats they belong to; each narrator line starts with its feature's caption.
+# Each line sits on the acting beat it belongs to; the question starts as its words pop in.
 print('voice-over:')
 place_vo(vo, VDIR, [
     ('c_hook', .45), ('c_research', S(3.3)), ('c_trend', S(7.62)), ('c_trend2', S(8.7)), ('c_idea', S(9.88)), ('c_idea2', S(11.68)),
     ('c_caption', S(13.75)), ('c_edit', S(16.3)), ('c_done', S(18.5)), ('c_punch1', S(21.2)), ('c_punch2', S(21.8)),
-    ('n_1', S(22.85)), ('n_2', V_PITCH + 1.9),
-    ('n_3', A(1.1)), ('n_4', A(3.4)), ('n_5', A(7.3)), ('n_6', A(11.0)), ('n_7', A(13.65)),
-    ('c_morning1', A(16.0)), ('c_morning2', A(16.6)), ('n_8', V_END + .8)])
+    ('c_ask', V_OUTRO + .45)])
 
 mixdown(music, sfx, vo, OUT)

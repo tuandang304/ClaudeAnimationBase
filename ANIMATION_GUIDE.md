@@ -114,6 +114,8 @@ These are the classic principles of character animation, as they apply here. Mos
 
 ### 1. Storyboard
 
+If the video is for a product or brand, read its folder in [context/](context/README.md) first (`context/<project>/README.md`): what it is, who it's for, what may be claimed, its colours, voice and campaign. Name it in the video's `video.js` (`context: '<project>'`).
+
 Every video lives in its own folder, `videos/<name>/` (episodes of a series get numbered names: `aima-01`, `aima-02`, …), and never touches another video's files. Write `videos/<name>/STORYBOARD.md` before any scene code:
 
 ```
@@ -142,7 +144,7 @@ Check the storyboard against the rules:
 
 ### 2. Build
 
-- Make `videos/<name>/video.js` with `PROJECT = { title, duration, bpm, offset, scenes: ['scene.js'] }` (see [videos/aima-01/video.js](videos/aima-01/video.js) for every field). `scenes` lists your scripts in load order, relative to the folder.
+- Make `videos/<name>/video.js` with `PROJECT = { title, duration, bpm, offset, scenes: ['scene.js'] }` (add `size: [1080, 1920]` for vertical video such as TikTok; the default is 1920 × 1080) (see [videos/aima-01/video.js](videos/aima-01/video.js) for every field). `scenes` lists your scripts in load order, relative to the folder.
 - Put the scene in `videos/<name>/scene.js`, wrapped in an IIFE, ending with `shots([...])`. Open `studio.html?video=<name>` to scrub it, and pass `--video=<name>` to every `render.mjs` command (output goes to `out/<name>/`).
 - Build and check one shot at a time, in order.
 - Within a shot, block the key poses first and check them as stills (`--sheet` at the key times). Add the motion between them once they read.
@@ -219,7 +221,9 @@ node render.mjs --video=<name> --encode                         # … then encod
 | `src/clawd.js` | Clawd: views, emotions, eyes, mouths, hats, emotes, moves |
 | `src/timeline.js` | `shots()`, `LOOPS`, `brushWipe()` |
 | `src/sheets.js` | the model sheets as loops (`?loop=emotions`, `?loop=views`) |
+| `context/<project>/` | what a video is about: product, brand, campaign (no code). See [context/README.md](context/README.md) |
 | `videos/<name>/` | one video: `video.js` (`PROJECT`, and `TIMING` if it warps time), `scene.js`, `STORYBOARD.md`, `audio/` |
+| `videos/_<series>/` | code shared by a series' videos (not a video itself): e.g. `videos/_aima/set.js`, the AIMA room, creator, lettering and outro |
 | `videos/demo/` | an 11-second example. **Don't copy it** (see the end of this guide) |
 | `studio.html` | open it in Chrome to scrub a video (`?video=aima-01`, `?t=2.5` jumps to a time, `?loop=emotions` shows a loop) |
 | `tools/make_vo.py` | voice-over clips from a video's `audio/lines.tsv` (VieNeu-TTS, offline) |

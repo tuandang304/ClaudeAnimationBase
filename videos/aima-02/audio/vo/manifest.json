@@ -1,0 +1,90 @@
+{
+ "d_hook": {
+  "text": "Hôm nay nhất định phải đăng một cái content!",
+  "spoken": "Hôm nay nhất định phải đăng một cái còn ten!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_scroll": {
+  "text": "Lướt tìm trend tí đã...",
+  "spoken": "Lướt tìm trend tí đã...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_save1": {
+  "text": "Cái này hay... lưu!",
+  "spoken": "Cái này hay... lưu!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_save2": {
+  "text": "Cái này cũng hay... lưu luôn!",
+  "spoken": "Cái này cũng hay... lưu luôn!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_saved": {
+  "text": "Ơ... lưu ba chục cái rồi à?",
+  "spoken": "Ơ... lưu ba chục cái rồi à?",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_notes": {
+  "text": "Thôi, mở ghi chú viết luôn!",
+  "spoken": "Thôi, mở ghi chú viết luôn!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_del1": {
+  "text": "Không ổn... xoá.",
+  "spoken": "Không ổn... xoá.",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_del2": {
+  "text": "Cũng không được... xoá!",
+  "spoken": "Cũng không được... xoá!",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_punch1": {
+  "text": "Rồi...",
+  "spoken": "Rồi...",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_punch2": {
+  "text": "Rốt cuộc là đăng gì đây?",
+  "spoken": "Rốt cuộc là đăng gì đây?",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ },
+ "d_ask": {
+  "text": "Có ai cũng từng bị đứng hình như vậy không?",
+  "spoken": "Có ai cũng từng bị đứng hình như vậy không?",
+  "voice": "Ngọc Huyền",
+  "tempo": 0.95,
+  "temperature": 0.4,
+  "takes": 3
+ }
+}

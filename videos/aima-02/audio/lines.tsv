@@ -1,0 +1,13 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+d_hook	creator	Hôm nay nhất định phải đăng một cái content!
+d_scroll	creator	Lướt tìm trend tí đã...
+d_save1	creator	Cái này hay... lưu!
+d_save2	creator	Cái này cũng hay... lưu luôn!
+d_saved	creator	Ơ... lưu ba chục cái rồi à?
+d_notes	creator	Thôi, mở ghi chú viết luôn!
+d_del1	creator	Không ổn... xoá.
+d_del2	creator	Cũng không được... xoá!
+d_punch1	creator	Rồi...
+d_punch2	creator	Rốt cuộc là đăng gì đây?
+d_ask	creator	Có ai cũng từng bị đứng hình như vậy không?

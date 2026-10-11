@@ -48,6 +48,7 @@ The voices every video uses are in [tools/voice/voices.json](tools/voice/voices.
 | [src/clawd.js](src/clawd.js) | Clawd: views, emotions, eyes, mouths, hats, emotes, dances |
 | [src/core.js](src/core.js) | Painting, timing, motion helpers, camera, light, paper |
 | [src/timeline.js](src/timeline.js) | Shots, loops and the brush-wipe transition |
+| [context/](context/) | What the videos are about: one folder per product/brand (now [AIMA](context/aima/README.md)): product, brand, campaign plan |
 | [videos/](videos/) | One folder per video: `video.js` (length, tempo, pacing), `scene.js`, `STORYBOARD.md`, `audio/` |
 | [tools/](tools/) | Voice-over (`make_vo.py`, VieNeu-TTS offline), the shared synth (`audiokit.py`), voices and pronunciation (`voice/`) |
 | [render.mjs](render.mjs) | Headless renderer: contact sheets, frame strips, crops, stills, MP4 |
