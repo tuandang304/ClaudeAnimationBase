@@ -184,6 +184,8 @@ function centred(pts, draw) {
 }
 function paint(pts, o = {}) { centred(pts, (P) => paintAt(P, o)); }
 function paintAt(pts, o) {
+  // PROJECT.flatFills: watercolour fills become flat washes (fills cost seconds a frame without a GPU)
+  if (PROJECT.flatFills && o.fill) o = o.wash ? { ...o, fill: null } : { ...o, wash: o.fill, washOp: (o.fillOp ?? 170) * .6, fill: null };
   if (o.wash || o.fill || o.hatch) {
     if (o.wash) brush.wash(o.wash, o.washOp ?? 255); else brush.noWash();
     if (o.fill) { brush.fill(o.fill, o.fillOp ?? 170); brush.fillBleed(o.bleed ?? .1); brush.fillTexture(o.tex ?? .4, o.border ?? .35); } else brush.noFill();
@@ -278,6 +280,8 @@ async function setup() {
   paperG = makePaper(); grainC = makeGrain(); glowTex = makeGlowTex(); letG = createGraphics(W, H); letG.pixelDensity(1);
   outC = document.getElementById('out'); outX = outC.getContext('2d');
   await document.fonts.load('100px "Permanent Marker"');
+  // scenes can queue async loaders (images, fonts) that must finish before the first frame: (window.PRELOAD ||= []).push(async () => {...})
+  for (const f of window.PRELOAD || []) await f();
   window.ready = true;
   if (!location.search.includes('render')) devUI();
 }
