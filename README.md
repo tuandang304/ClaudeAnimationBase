@@ -10,7 +10,7 @@ Clone it, open it in Claude Code (or any coding agent) and ask for what you want
 
 > Read ANIMATION_GUIDE.md, then make a 15-second video of Clawd trying to catch a butterfly.
 
-The model storyboards first, builds shot by shot, renders contact sheets to check its own work, and writes `out/video.mp4`. [ANIMATION_GUIDE.md](ANIMATION_GUIDE.md) holds the rules it follows: handmade, alive, one piece, no text, transitions always, something happens in every scene, and a solid medium of brush strokes, flat 2D and boiling linework. It also covers timing for the viewer and the core principles of character animation.
+The model storyboards first, builds shot by shot in its own folder under `videos/`, renders contact sheets to check its own work, and writes `out/<video>/video.mp4`. [ANIMATION_GUIDE.md](ANIMATION_GUIDE.md) holds the rules it follows: handmade, alive, one piece, no text, transitions always, something happens in every scene, and a solid medium of brush strokes, flat 2D and boiling linework. It also covers timing for the viewer and the core principles of character animation.
 
 ## Run it yourself
 
@@ -20,12 +20,25 @@ Without a dedicated GPU, p5.brush's watercolour fills make render times fairly s
 
 ```bash
 npm install
-node render.mjs --clip --out=out/video.mp4
+node render.mjs --clip                       # the demo → out/demo/video.mp4
+node render.mjs --video=aima-01 --clip       # another video → out/aima-01/video.mp4
 ```
 
-That renders the 11-second demo in [src/scenes/demo.js](src/scenes/demo.js). Open [studio.html](studio.html) in Chrome to scrub through it. Add `?loop=emotions` or `?loop=views` to see the model sheets. If Chrome isn't in a standard location, pass `--chrome=<path>` or set `CHROME_PATH`.
+Each video is a folder in [videos/](videos/) (`video.js` for its length, tempo and soundtrack, `scene.js`, `STORYBOARD.md`, `audio/`). `--video=<name>` picks one (the default is the 11-second demo in [videos/demo/](videos/demo/)). Open [studio.html](studio.html) in Chrome to scrub through it, with `?video=aima-01` for another video. Add `?loop=emotions` or `?loop=views` to see the model sheets. If Chrome isn't in a standard location, pass `--chrome=<path>` or set `CHROME_PATH`.
 
 On Linux, `render.mjs` starts Chrome with `--no-sandbox` (Ubuntu 23.10+ blocks Chrome's sandbox in headless use) and also finds a Chromium installed by Playwright. With no GPU at all, add `--soft-gl` to render WebGL in software: slow on watercolour fills, but it works. On a headless Linux machine with an NVIDIA GPU (a cloud or cluster node), add `--gpu-angle=gl-egl` (or `vulkan`); `node gpu_probe.mjs <chrome path>` shows which renderer each set of flags gets.
+
+## Voice-over
+
+Videos with a voice build it offline with [VieNeu-TTS](https://pypi.org/project/vieneu/) (Apache-2.0; the audio may be used commercially):
+
+```bash
+uv venv --python 3.12 .venv && VIRTUAL_ENV=.venv uv pip install -r tools/requirements.txt   # once
+.venv/bin/python tools/make_vo.py videos/aima-01          # voice clips from audio/lines.tsv
+.venv/bin/python videos/aima-01/audio/make_audio.py       # music, effects and voice → audio/soundtrack.m4a
+```
+
+The voices every video uses are in [tools/voice/voices.json](tools/voice/voices.json), and how they read English words (content → còn ten, …) in [tools/voice/pronunciation.tsv](tools/voice/pronunciation.tsv). See "Voice-over and pacing" in the guide.
 
 ## What's here
 
@@ -35,7 +48,8 @@ On Linux, `render.mjs` starts Chrome with `--no-sandbox` (Ubuntu 23.10+ blocks C
 | [src/clawd.js](src/clawd.js) | Clawd: views, emotions, eyes, mouths, hats, emotes, dances |
 | [src/core.js](src/core.js) | Painting, timing, motion helpers, camera, light, paper |
 | [src/timeline.js](src/timeline.js) | Shots, loops and the brush-wipe transition |
-| [src/config.js](src/config.js) | Length and tempo |
-| [src/scenes/](src/scenes/) | Your video goes here (the demo is an example) |
+| [context/](context/) | What the videos are about: one folder per product/brand (now [AIMA](context/aima/README.md)): product, brand, campaign plan |
+| [videos/](videos/) | One folder per video: `video.js` (length, tempo, pacing), `scene.js`, `STORYBOARD.md`, `audio/` |
+| [tools/](tools/) | Voice-over (`make_vo.py`, VieNeu-TTS offline), the shared synth (`audiokit.py`), voices and pronunciation (`voice/`) |
 | [render.mjs](render.mjs) | Headless renderer: contact sheets, frame strips, crops, stills, MP4 |
 | [docs/](docs/) | Model sheets: [emotions](docs/emotions.jpg) (also [animated](docs/emotions.webp)) and [views, motion and hats](docs/views.jpg) |

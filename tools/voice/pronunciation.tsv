@@ -1,0 +1,7 @@
+# How the voice reads words it would otherwise get wrong, for every video (tools/make_vo.py).
+# word<TAB>spoken. Whole words, any case; the line's text (and the captions) keep the real spelling.
+# Longer entries win over shorter ones, so "AIMA" is read before any rule for "AI".
+content	còn ten
+idea	ai đia
+research	rì sớt
+AIMA	ai ma

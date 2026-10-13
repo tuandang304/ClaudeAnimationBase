@@ -1,0 +1,194 @@
+{
+ "c_hook": {
+  "text": "Hôm nay làm đúng một cái content thôi. Ba mươi phút là xong!",
+  "spoken": "Hôm nay làm đúng một cái còn ten thôi. Ba mươi phút là xong!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_research": {
+  "text": "Research tí đã... Cái này hay... Cái này cũng hay... Ơ, cái này còn hay hơn...",
+  "spoken": "rì sớt tí đã... Cái này hay... Cái này cũng hay... Ơ, cái này còn hay hơn...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_trend": {
+  "text": "Ối, trend này đang hot nè! Làm liền!",
+  "spoken": "Ối, trend này đang hot nè! Làm liền!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_trend2": {
+  "text": "Ơ. Hết hot rồi?",
+  "spoken": "Ơ. Hết hot rồi?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_idea": {
+  "text": "Thôi, tự nghĩ idea. Năm phút thôi.",
+  "spoken": "Thôi, tự nghĩ ai đia. Năm phút thôi.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_no1": {
+  "text": "Không...",
+  "spoken": "Không...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_no2": {
+  "text": "Không...",
+  "spoken": "Không...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_no3": {
+  "text": "Cũng không...",
+  "spoken": "Cũng không...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_idea2": {
+  "text": "A! Có rồi!",
+  "spoken": "A! Có rồi!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_caption": {
+  "text": "Viết caption... Ừm, nghe sến quá.",
+  "spoken": "Viết caption... Ừm, nghe sến quá.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_caption2": {
+  "text": "Viết lại!",
+  "spoken": "Viết lại!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_edit": {
+  "text": "Edit nốt... Render nữa là xong...",
+  "spoken": "Edit nốt... Render nữa là xong...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_done": {
+  "text": "Xong! Thấy chưa, một cái content thôi, nhanh mà...",
+  "spoken": "Xong! Thấy chưa, một cái còn ten thôi, nhanh mà...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_punch1": {
+  "text": "Ủa?",
+  "spoken": "Ủa?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_punch2": {
+  "text": "Hết ngày rồi?",
+  "spoken": "Hết ngày rồi?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "c_ask": {
+  "text": "Bạn mất bao lâu cho một cái content? Comment cho mình biết với!",
+  "spoken": "Bạn mất bao lâu cho một cái còn ten? Comment cho mình biết với!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

@@ -114,7 +114,9 @@ These are the classic principles of character animation, as they apply here. Mos
 
 ### 1. Storyboard
 
-Write `STORYBOARD.md` before any scene code:
+If the video is for a product or brand, read its folder in [context/](context/README.md) first (`context/<project>/README.md`): what it is, who it's for, what may be claimed, its colours, voice and campaign. Name it in the video's `video.js` (`context: '<project>'`).
+
+Every video lives in its own folder, `videos/<name>/` (episodes of a series get numbered names: `aima-01`, `aima-02`, …), and never touches another video's files. Write `videos/<name>/STORYBOARD.md` before any scene code:
 
 ```
 Logline: one sentence. Clawd wants ___, but ___, so ___.
@@ -142,13 +144,13 @@ Check the storyboard against the rules:
 
 ### 2. Build
 
-- Set `duration` (and `bpm`) in [src/config.js](src/config.js).
-- Put your scene in a new file (e.g. `src/scenes/my_video.js`), wrapped in an IIFE, and end it with `shots([...])`. In [studio.html](studio.html), **replace** the `demo.js` script tag with yours.
+- Make `videos/<name>/video.js` with `PROJECT = { title, duration, bpm, offset, scenes: ['scene.js'] }` (add `size: [1080, 1920]` for vertical video such as TikTok; the default is 1920 × 1080) (see [videos/aima-01/video.js](videos/aima-01/video.js) for every field). `scenes` lists your scripts in load order, relative to the folder.
+- Put the scene in `videos/<name>/scene.js`, wrapped in an IIFE, ending with `shots([...])`. Open `studio.html?video=<name>` to scrub it, and pass `--video=<name>` to every `render.mjs` command (output goes to `out/<name>/`).
 - Build and check one shot at a time, in order.
 - Within a shot, block the key poses first and check them as stills (`--sheet` at the key times). Add the motion between them once they read.
 
 ```js
-// src/scenes/my_video.js
+// videos/my_video/scene.js
 (() => {
   function park(t, lt, dur) {                        // t = video time, lt = time in this shot, dur = shot length
     camBegin(960 + 20 * Math.sin(lt * .6), 540, 1 + .02 * lt);   // slow drift and push: the camera is never dead
@@ -168,7 +170,7 @@ Check the storyboard against the rules:
 
 ### 3. Look at it: the review loop
 
-You can't see motion by reading code. Render and look at every shot, several times, at three zoom levels:
+You can't see motion by reading code. Render and look at every shot, several times, at three zoom levels (add `--video=<name>` to each; without `--out`, images go to `out/<name>/`):
 
 ```bash
 # contact sheet: the shape of the whole piece (every shot's first, middle and last frames)
@@ -202,9 +204,9 @@ Fix what you find, then look again. **Budget:** at least one sheet per shot, a s
 ### 4. Render
 
 ```bash
-node render.mjs --clip --out=out/video.mp4                      # the whole video, straight to MP4
-node render.mjs --frames --workers=4                            # or: parallel + resumable JPEG frames into out/frames …
-node render.mjs --encode --out=out/video.mp4                    # … then encode them
+node render.mjs --video=<name> --clip                           # the whole video, straight to out/<name>/video.mp4
+node render.mjs --video=<name> --frames --workers=4             # or: parallel + resumable JPEG frames into out/<name>/frames …
+node render.mjs --video=<name> --encode                         # … then encode them
 ```
 
 ---
@@ -215,13 +217,18 @@ node render.mjs --encode --out=out/video.mp4                    # … then encod
 
 | file | what's in it |
 |---|---|
-| `src/config.js` | `PROJECT = { duration, bpm, offset, audio? }` |
 | `src/core.js` | canvas, palette, timing and motion helpers, `paint()`, camera, full-frame effects, `glow()`, lettering, paper, render hooks |
 | `src/clawd.js` | Clawd: views, emotions, eyes, mouths, hats, emotes, moves |
 | `src/timeline.js` | `shots()`, `LOOPS`, `brushWipe()` |
 | `src/sheets.js` | the model sheets as loops (`?loop=emotions`, `?loop=views`) |
-| `src/scenes/demo.js` | an 11-second example. **Don't copy it** (see the end of this guide) |
-| `studio.html` | open it in Chrome to scrub the video (`?t=2.5` jumps to a time, `?loop=emotions` shows a loop) |
+| `context/<project>/` | what a video is about: product, brand, campaign (no code). See [context/README.md](context/README.md) |
+| `videos/<name>/` | one video: `video.js` (`PROJECT`, and `TIMING` if it warps time), `scene.js`, `STORYBOARD.md`, `audio/` |
+| `videos/_<series>/` | code shared by a series' videos (not a video itself): e.g. `videos/_aima/set.js`, the AIMA room, creator, lettering and outro |
+| `videos/demo/` | an 11-second example. **Don't copy it** (see the end of this guide) |
+| `studio.html` | open it in Chrome to scrub a video (`?video=aima-01`, `?t=2.5` jumps to a time, `?loop=emotions` shows a loop) |
+| `tools/make_vo.py` | voice-over clips from a video's `audio/lines.tsv` (VieNeu-TTS, offline) |
+| `tools/audiokit.py` | synth instruments, sound effects, `warp()` and the mixdown, for each video's `audio/make_audio.py` |
+| `tools/voice/` | the voices every video uses, and how they pronounce words (`pronunciation.tsv`) |
 | `render.mjs` | headless renderer: sheets, strips, crops, stills, PNG loops, MP4 |
 
 ### Frames are pure functions of time
@@ -415,10 +422,21 @@ clawd(x, y, 24, { ...feel('proud', t), aR: 1.2, armR: (u, sw) => paint(starPts(u
 
 The kit doesn't need music, but it's built for it:
 
-1. Set `bpm` to the song's tempo in [src/config.js](src/config.js), and set `offset` to the time of its first downbeat in seconds. Every idle, dance and `pulse()` then locks to the song.
-2. Put the audio in `assets/` and set `PROJECT.audio` (or pass `--audio=`). `--clip` and `--encode` mux it in.
+1. Set `bpm` to the song's tempo in the video's `video.js`, and set `offset` to the time of its first downbeat in seconds. Every idle, dance and `pulse()` then locks to the song.
+2. Put the audio in `videos/<name>/audio/` and set `PROJECT.audio` (relative to the video's folder), or pass `--audio=`. `--clip` and `--encode` mux it in.
 3. Land hits, cuts and takes on beats (`beatN`, `pulse`). Cut on bar lines for big changes, and give each musical phrase its own visual.
 4. **Lyrics are not text.** Don't put words on screen. Act the meaning of a line instead.
+
+## Voice-over and pacing
+
+Videos with a voice (like [videos/aima-01](videos/aima-01)) keep it in `videos/<name>/audio/`:
+
+- `lines.tsv`: `id  role  text  [tempo]`. Write words as they appear on screen ("content", "idea"). The role picks the voice from [tools/voice/voices.json](tools/voice/voices.json) (creator: Thái Sơn, narrator: Hải Đăng, both VieNeu-TTS presets; `make_vo.py --audition="…"` renders a line in every voice to compare; a video can override them in its own `audio/voices.json`). [tools/voice/pronunciation.tsv](tools/voice/pronunciation.tsv) respells words for the voice only (content → còn ten, idea → ai đia, research → rì sớt, AIMA → ai ma); add to it rather than misspelling a line.
+- A line is spoken a sentence at a time and joined with real pauses (`pauses` in voices.json: 0.45 s after `.`/`!`/`?`, 0.6 s after `…`), because the model alone barely stops between sentences.
+- `.venv/bin/python tools/make_vo.py videos/<name>` writes `audio/vo/<id>.wav` for every new or changed line (`--force` redoes them, `--list` shows the voices). Setup, once: `uv venv --python 3.12 .venv && VIRTUAL_ENV=.venv uv pip install -r tools/requirements.txt`.
+- `audio/make_audio.py` places the clips and builds the music and effects with [tools/audiokit.py](tools/audiokit.py). It prints a cue sheet and flags any line that starts less than 0.6 s after the last one ends.
+
+**Pacing.** A line needs its own space: never let two lines overlap, leave at least 0.6–0.7 s between them, let a reaction land before the next line, and don't let a line spill across a transition. Split a two-beat line ("Ủa? … Hết ngày rồi?") into two clips so each beat sits on its own picture. When a stretch is too fast, don't retime every key: give the part a `TIMING` warp in `video.js` (`rates: [[event time, speed], ...]`, see `warp()` in `src/core.js`). Slow the acting and talking (.5–.8), keep camera whips and time-lapses at 1, and feed the scene's emotion and camera keys through `.keys()` so blinks, breathing and idles stay at full speed. The soundtrack reads the same `TIMING`, so picture and sound move together.
 
 ## Common failures
 
@@ -442,7 +460,7 @@ These are the things that make a Clawd video look generated. Check your storyboa
 
 ## About the demo
 
-[src/scenes/demo.js](src/scenes/demo.js) ("The fallen star") exists to show the kit working: an acted emotion timeline, a drawn turn, a trot, a pickup, a throw on an arc, `glow`, a brush wipe and an iris in and out. **It's one idea, not a template.** Don't reuse its story, night sky, hills, star or shot structure. Start from the prompt and your own storyboard, and replace its script tag in `studio.html` with yours.
+[videos/demo/scene.js](videos/demo/scene.js) ("The fallen star") exists to show the kit working: an acted emotion timeline, a drawn turn, a trot, a pickup, a throw on an arc, `glow`, a brush wipe and an iris in and out. **It's one idea, not a template.** Don't reuse its story, night sky, hills, star or shot structure. Start from the prompt and your own storyboard, in your own `videos/<name>/` folder.
 
 ### Worked example: how the demo times its ending
 

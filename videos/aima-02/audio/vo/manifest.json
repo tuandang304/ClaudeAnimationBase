@@ -1,0 +1,134 @@
+{
+ "d_hook": {
+  "text": "Hôm nay nhất định phải đăng một cái content!",
+  "spoken": "Hôm nay nhất định phải đăng một cái còn ten!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_scroll": {
+  "text": "Lướt tìm trend tí đã...",
+  "spoken": "Lướt tìm trend tí đã...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_save1": {
+  "text": "Cái này hay... lưu!",
+  "spoken": "Cái này hay... lưu!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_save2": {
+  "text": "Cái này cũng hay... lưu luôn!",
+  "spoken": "Cái này cũng hay... lưu luôn!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_saved": {
+  "text": "Ơ... lưu ba chục cái rồi à?",
+  "spoken": "Ơ... lưu ba chục cái rồi à?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_notes": {
+  "text": "Thôi, mở ghi chú viết luôn!",
+  "spoken": "Thôi, mở ghi chú viết luôn!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_del1": {
+  "text": "Không ổn... xoá.",
+  "spoken": "Không ổn... xoá.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_del2": {
+  "text": "Cũng không được... xoá!",
+  "spoken": "Cũng không được... xoá!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_punch1": {
+  "text": "Rồi...",
+  "spoken": "Rồi...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_punch2": {
+  "text": "Rốt cuộc là đăng gì đây?",
+  "spoken": "Rốt cuộc là đăng gì đây?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "d_ask": {
+  "text": "Có ai cũng từng bị đứng hình như vậy không?",
+  "spoken": "Có ai cũng từng bị đứng hình như vậy không?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

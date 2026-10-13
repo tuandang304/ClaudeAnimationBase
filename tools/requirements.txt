@@ -1,0 +1,5 @@
+# for tools/make_vo.py (voice) and videos/*/audio/make_audio.py (soundtracks)
+numpy
+vieneu
+# onnxruntime 1.23+ refuses VieNeu's ONNX weights through the Hugging Face cache's symlinks
+onnxruntime==1.22.1

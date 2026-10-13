@@ -1,0 +1,14 @@
+{
+  "_doc": "Voice settings shared by every video (tools/make_vo.py). A line's role in videos/<name>/audio/lines.tsv picks a voice from 'roles'; a video can override any of this in its own audio/voices.json. Voices are VieNeu-TTS v3 Turbo presets: `.venv/bin/python tools/make_vo.py --audition=\"some line\"` renders the line in every voice for comparison (out/voices/index.html).",
+  "roles": {
+    "creator": "Thái Sơn",
+    "narrator": "Hải Đăng"
+  },
+  "temperature": 0.4,
+  "takes": 3,
+  "_tempo": "speaking rate per role, without changing the pitch: 1 = as the model speaks, .92 = 8% slower. A line can set its own in lines.tsv.",
+  "tempo": { "creator": 1.0, "narrator": 0.92 },
+  "_pauses": "seconds of silence after each sentence inside a line: after '.', '!' or '?' (sentence), and after '…' or '...' (ellipsis, a trailing-off pause). Commas are left to the voice.",
+  "pauses": { "sentence": 0.45, "ellipsis": 0.6 },
+  "pad": 0.04
+}

@@ -7,29 +7,47 @@
 <style>
   html, body { margin: 0; background: #1b1820; color: #eee; font: 13px system-ui, sans-serif; }
   main { padding: 12px; display: grid; gap: 8px; }
-  #out { width: min(100%, 1280px); aspect-ratio: 16 / 9; height: auto; background: #F3EBDC; }
+  #out { width: min(100%, 1280px); max-height: 88vh; object-fit: contain; height: auto; background: #F3EBDC; }
   .p5Canvas { display: none !important; }
   .bar { display: flex; gap: 10px; align-items: center; max-width: 1280px; }
   #scrub { flex: 1; }
   #tt { font-variant-numeric: tabular-nums; min-width: 190px; }
+  /* Baloo 2 (SIL OFL, assets/fonts/OFL-Baloo2.txt): a rounded display face with Vietnamese, for the punchline */
+  @font-face { font-family: 'Baloo 2'; font-weight: 400 800; font-display: block; src: url(assets/fonts/baloo2-vietnamese.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB; }
+  @font-face { font-family: 'Baloo 2'; font-weight: 400 800; font-display: block; src: url(assets/fonts/baloo2-latin-ext.woff2) format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Baloo 2'; font-weight: 400 800; font-display: block; src: url(assets/fonts/baloo2-latin.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 </style>
 <script src="node_modules/p5/lib/p5.min.js"></script>
 <script src="node_modules/p5.brush/dist/p5.brush.js"></script>
+<script>
+  // Which video: studio.html?video=<folder in videos/> (default: demo). Its video.js (PROJECT) loads before the engine,
+  // and the scripts it lists in PROJECT.scenes load after it.
+  const VIDEO = new URLSearchParams(location.search).get('video') || 'demo', VIDEO_DIR = `videos/${VIDEO}/`;
+  document.title = `${VIDEO} · Clawd studio`;
+  document.write(`<script src="${VIDEO_DIR}video.js"><\/script>`);
+</script>
 </head>
 <body>
 <main>
   <canvas id="out" width="1920" height="1080"></canvas>
-  <div class="bar"><input id="scrub" type="range" min="0" max="11" step="0.0417" value="0"><span id="tt">loading…</span></div>
+  <div class="bar"><input id="scrub" type="range" min="0" max="10" step="0.0417" value="0"><span id="tt">loading…</span></div>
 </main>
 <!-- engine -->
-<script src="src/config.js"></script>
 <script src="src/core.js"></script>
 <script src="src/clawd.js"></script>
 <script src="src/timeline.js"></script>
 <!-- reference sheets (standalone loops) -->
 <script src="src/sheets.js"></script>
-<!-- your video: add a script per scene file, in order -->
-<script src="src/scenes/demo.js"></script>
+<!-- the video's own scripts (PROJECT.scenes in its video.js) -->
+<script>
+  // the frame size comes from the video (PROJECT.size, default 1920 × 1080)
+  if (typeof PROJECT !== 'undefined') { const [w, h] = PROJECT.size || [1920, 1080], c = document.getElementById('out'); c.width = w; c.height = h; c.style.aspectRatio = `${w} / ${h}`; if (h > w) c.style.width = 'auto'; }
+  if (typeof PROJECT === 'undefined') document.body.insertAdjacentHTML('afterbegin', `<p style="color:#f88">No video named "${VIDEO}": see the folders in videos/.</p>`);
+  else for (const f of PROJECT.scenes || []) document.write(`<script src="${VIDEO_DIR}${f}"><\/script>`);
+</script>
 <script>
   // Open studio.html?loop=emotions (or views) to scrub a standalone loop instead of the video.
   const q = new URLSearchParams(location.search).get('loop'); if (q && LOOPS[q]) window.LOOP = LOOPS[q];
