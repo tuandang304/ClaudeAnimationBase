@@ -24,12 +24,12 @@ Thứ tự đăng trên mọi nền tảng: 2 bài Awareness → 2 Problem → 2
 2. **Awareness · 12/10 · deadline 11/10 · POV / Skit · video → [videos/aima-02](../../videos/aima-02/)**
    "Mở laptop ra… và không biết đăng gì.": nhân vật mở laptop với quyết tâm làm content → lướt TikTok tìm trend → lưu
    hàng loạt video → mở Notes → viết rồi xoá → vẫn không biết bắt đầu từ đâu. · Thành Tuấn, Bảo Yến
-3. **Problem · 16/10 · deadline 17/10 · Skit / Storytelling**
+3. **Problem · 16/10 · deadline 17/10 · Skit / Storytelling · video → [videos/aima-03](../../videos/aima-03/)**
    "Trend này đang viral… nhưng brand mình làm gì với nó?": creator thấy một trend hot, rất muốn bắt trend nhưng lo
    không hợp brand/audience → càng nghĩ càng bí. · Anh Vũ, Triệu Vy
-4. **Problem · 20/10 · deadline 19/10 · POV / Fast-cut Skit**
+4. **Problem · 20/10 · deadline 19/10 · POV / Fast-cut Skit · video → [videos/aima-04](../../videos/aima-04/)**
    "POV: Mở 7 tab để làm 1 cái content". Phần nội dung chính trong bảng gốc đang chép trùng bài 3 (trend không hợp
-   brand); theo chủ đề thì bài này nói về việc mở quá nhiều tab. Hỏi lại trước khi làm. · Lan Nguyễn, Bảo Yến
+   brand); aima-04 làm theo chủ đề: mở 7 tab, mỗi tab một công cụ (theo bài Threads 4). · Lan Nguyễn, Bảo Yến
 5. **Solution · 24/10 · deadline 23/10 · Skit / Storytelling**
    "POV: Làm 1 content nhưng mở 7 cái app.": chuyển cảnh liên tục giữa TikTok, ChatGPT, Canva, CapCut, Meta… để hoàn
    thành một content → càng làm càng rối. · Thành Tuấn, Triệu Vy
@@ -124,6 +124,6 @@ Phụ trách: Lan Nguyễn, cùng Bảo Yến (bài lẻ) hoặc Triệu Vy (bà
 
 ## Ứng viên làm video tiếp theo
 
-Các bài dạng POV/skit trên TikTok hợp với kit hoạt hình này nhất: TikTok 3 (trend viral không hợp brand), TikTok 4/5
-(7 tab / 7 cái app). TikTok 1 và 2 đã làm (aima-01, aima-02). Bài demo, tutorial và talking head (TikTok 6–8) cần quay
+TikTok 1–4 đã làm (aima-01 … aima-04). Còn TikTok 5 ("Làm 1 content nhưng mở 7 cái app", gần trùng chủ đề với
+aima-04: nên làm khác đi, vd. chuyển cảnh giữa các app rồi hé lộ concept "có một đứa ngồi kế bên" cho đúng giai đoạn Solution). Bài demo, tutorial và talking head (TikTok 6–8) cần quay
 màn hình sản phẩm thật, nên không làm bằng kit này được.

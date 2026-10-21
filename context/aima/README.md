@@ -31,10 +31,12 @@ marketing, cho **creator độc lập** và **doanh nghiệp nhỏ/siêu nhỏ (
 ## Video đã làm
 
 Video dọc 1080×1920 cho TikTok, dùng chung căn phòng, creator, chữ và phần kết của series trong
-[videos/_aima/set.js](../../videos/_aima/set.js). Video Awareness kết bằng một câu hỏi cho khán giả và logo AIMA nhỏ, không
-giới thiệu tính năng.
+[videos/_aima/set.js](../../videos/_aima/set.js). Video Awareness/Problem kết bằng một câu hỏi cho khán giả và logo AIMA nhỏ,
+không giới thiệu tính năng.
 
 | video | bài trong kế hoạch | ghi chú |
 |---|---|---|
 | [videos/aima-01](../../videos/aima-01/) | TikTok 1 · Awareness · "Tôi chỉ định làm 1 cái content thôi…" | 60.9 s; kịch bản "30 phút là xong" → nửa đêm; kết: "Bạn mất bao lâu cho 1 cái content?" |
 | [videos/aima-02](../../videos/aima-02/) | TikTok 2 · Awareness · "Mở laptop ra… và không biết đăng gì." | 39.4 s; kết: "Có ai cũng từng bị đứng hình như vậy không?" |
+| [videos/aima-03](../../videos/aima-03/) | TikTok 3 · Problem · "Trend này đang viral… nhưng brand mình làm gì với nó?" | 39.4 s; brand = hũ nến thơm trên bàn; chốt: "Thấy trend thì dễ… Biến thành content mới khó!"; kết: "Có ai từng nghĩ mãi, tới lúc trend hết hot chưa?" |
+| [videos/aima-04](../../videos/aima-04/) | TikTok 4 · Problem · "POV: Mở 7 tab để làm 1 cái content" | 31.4 s; chốt: "Chuyển tab… còn nhiều hơn làm content!"; kết: "Bạn đang mở bao nhiêu tab vậy?" |

@@ -1,0 +1,11 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+e_hook	creator	Ơ! Trend này đang viral nè!
+e_go	creator	Bắt trend liền thôi!
+e_try1	creator	Nến thơm mà nhảy... kỳ kỳ.
+e_try2	creator	Đổi màu cho bắt mắt?... Không giống brand mình.
+e_try3	creator	Mà khách của mình... có thích không ta?
+e_late	creator	Ủa... ai cũng làm trend này rồi?
+e_punch1	creator	Thấy trend thì dễ...
+e_punch2	creator	Biến thành content mới khó!
+e_ask	creator	Có ai từng nghĩ mãi, tới lúc trend hết hot chưa?
