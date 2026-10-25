@@ -1,0 +1,86 @@
+{
+ "i_hook": {
+  "text": "Một idea... mà viết lại cho bốn nền tảng?",
+  "spoken": "Một ai đia... mà viết lại cho bốn nền tảng?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "i_s1": {
+  "text": "Bước một: tạo hồ sơ thương hiệu.",
+  "spoken": "Bước một: tạo hồ sơ thương hiệu.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "i_s2": {
+  "text": "Bước hai: nhập một idea.",
+  "spoken": "Bước hai: nhập một ai đia.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "i_s3": {
+  "text": "Bước ba: AIMA chỉnh riêng cho từng nền tảng.",
+  "spoken": "Bước ba: ai ma chỉnh riêng cho từng nền tảng.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "i_s4": {
+  "text": "Bước bốn: xem lại, sửa chút... duyệt!",
+  "spoken": "Bước bốn: xem lại, sửa chút... duyệt!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "i_done": {
+  "text": "Content đầu tiên... xong rồi nè!",
+  "spoken": "còn ten đầu tiên... xong rồi nè!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "i_cta": {
+  "text": "Đăng ký dùng thử AIMA, làm content đầu tiên của bạn nhé!",
+  "spoken": "Đăng ký dùng thử ai ma, làm còn ten đầu tiên của bạn nhé!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

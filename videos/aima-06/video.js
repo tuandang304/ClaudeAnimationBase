@@ -4,7 +4,8 @@
 // stretch down without retiming the keys (warp() in src/core.js). Retime here, then rebuild the soundtrack.
 const knots = at => ({ rates: at.slice(0, -1).map(([e, v], i) => [e, (at[i + 1][0] - e) / (at[i + 1][1] - v)]), end: at[at.length - 1][0] });
 const TIMING = {
-  story: knots([[0, 0], [22.8, 22.8]]),
+  // slowed before the ideas, the doc and the platforms so each line finishes before the next
+  story: knots([[0, 0], [7.8, 7.8], [8.6, 9.0], [10.3, 10.7], [11.0, 11.6], [15.0, 15.6], [15.8, 16.8], [22.8, 23.8]]),
   outroLen: 5.2,                             // the call to action and the logo
   drag: [4.3, 5.2],                          // the trend (the dance from #3) is dragged into AIMA, which opens at 4.6
   open: 4.6,
@@ -24,7 +25,10 @@ const PROJECT = {
   title: 'AIMA #6 (TikTok, Solution): "Một trend vào AIMA thì chuyện gì xảy ra?"',
   context: 'aima',
   size: [1080, 1920],
-  duration: TIMING.story.end + TIMING.outroLen,
+  duration: (() => {
+    const { rates, end } = TIMING.story;
+    return rates.reduce((d, [e, r], i) => d + ((rates[i + 1] || [end])[0] - e) / r, 0) + TIMING.outroLen;
+  })(),
   bpm: 120, offset: 0, flatFills: false,
   audio: 'audio/soundtrack.m4a',
   scenes: ['../../assets/aima_logo.js', '../_aima/set.js', 'scene.js'],

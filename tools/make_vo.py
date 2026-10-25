@@ -41,9 +41,11 @@ def load_pron(*paths):
 
 
 def respell(text, rules):
-    for word in sorted(rules, key=len, reverse=True):
-        text = re.sub(r'(?<!\w)' + re.escape(word) + r'(?!\w)', rules[word], text, flags=re.IGNORECASE)
-    return text
+    # one pass, longest words first, so a respelling is never matched again ("AIMA" → "ai ma" must not then hit "AI")
+    if not rules: return text
+    lower = {w.lower(): s for w, s in rules.items()}
+    pat = r'(?<!\w)(?:' + '|'.join(re.escape(w) for w in sorted(rules, key=len, reverse=True)) + r')(?!\w)'
+    return re.sub(pat, lambda m: lower[m.group(0).lower()], text, flags=re.IGNORECASE)
 
 
 def trim(a, sr, pad, db=-42):
