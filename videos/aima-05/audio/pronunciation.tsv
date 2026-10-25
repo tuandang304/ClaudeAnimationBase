@@ -1,0 +1,2 @@
+# This video only: "AI" read as letters. Not in tools/voice/pronunciation.tsv because rules ignore case and Vietnamese "ai" (who) would match.
+AI	ây ai

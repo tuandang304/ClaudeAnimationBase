@@ -1,0 +1,9 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+g_hook	creator	Làm một cái content... cần bao nhiêu app nhỉ?
+g_apps	creator	Tìm trend... viết caption... thiết kế... dựng video... đăng bài... xem số liệu...
+g_tired	creator	Mệt quá...
+g_wish	creator	Ước gì... có một đứa ngồi kế bên.
+g_one	creator	Trend, idea, content, đăng bài... chung một chỗ!
+g_decide	creator	AI gợi ý... mình vẫn là người quyết định.
+g_cta	creator	Truy cập landing page AIMA để tìm hiểu thêm nhé!

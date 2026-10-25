@@ -1,0 +1,9 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+i_hook	creator	Một idea... mà viết lại cho bốn nền tảng?
+i_s1	creator	Bước một: tạo hồ sơ thương hiệu.
+i_s2	creator	Bước hai: nhập một idea.
+i_s3	creator	Bước ba: AIMA chỉnh riêng cho từng nền tảng.
+i_s4	creator	Bước bốn: xem lại, sửa chút... duyệt!
+i_done	creator	Content đầu tiên... xong rồi nè!
+i_cta	creator	Đăng ký dùng thử AIMA, làm content đầu tiên của bạn nhé!

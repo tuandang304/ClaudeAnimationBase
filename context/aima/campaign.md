@@ -24,22 +24,22 @@ Thứ tự đăng trên mọi nền tảng: 2 bài Awareness → 2 Problem → 2
 2. **Awareness · 12/10 · deadline 11/10 · POV / Skit · video → [videos/aima-02](../../videos/aima-02/)**
    "Mở laptop ra… và không biết đăng gì.": nhân vật mở laptop với quyết tâm làm content → lướt TikTok tìm trend → lưu
    hàng loạt video → mở Notes → viết rồi xoá → vẫn không biết bắt đầu từ đâu. · Thành Tuấn, Bảo Yến
-3. **Problem · 16/10 · deadline 17/10 · Skit / Storytelling**
+3. **Problem · 16/10 · deadline 17/10 · Skit / Storytelling · video → [videos/aima-03](../../videos/aima-03/)**
    "Trend này đang viral… nhưng brand mình làm gì với nó?": creator thấy một trend hot, rất muốn bắt trend nhưng lo
    không hợp brand/audience → càng nghĩ càng bí. · Anh Vũ, Triệu Vy
-4. **Problem · 20/10 · deadline 19/10 · POV / Fast-cut Skit**
+4. **Problem · 20/10 · deadline 19/10 · POV / Fast-cut Skit · video → [videos/aima-04](../../videos/aima-04/)**
    "POV: Mở 7 tab để làm 1 cái content". Phần nội dung chính trong bảng gốc đang chép trùng bài 3 (trend không hợp
-   brand); theo chủ đề thì bài này nói về việc mở quá nhiều tab. Hỏi lại trước khi làm. · Lan Nguyễn, Bảo Yến
-5. **Solution · 24/10 · deadline 23/10 · Skit / Storytelling**
+   brand); aima-04 làm theo chủ đề: mở 7 tab, mỗi tab một công cụ (theo bài Threads 4). · Lan Nguyễn, Bảo Yến
+5. **Solution · 24/10 · deadline 23/10 · Skit / Storytelling · video → [videos/aima-05](../../videos/aima-05/)**
    "POV: Làm 1 content nhưng mở 7 cái app.": chuyển cảnh liên tục giữa TikTok, ChatGPT, Canva, CapCut, Meta… để hoàn
    thành một content → càng làm càng rối. · Thành Tuấn, Triệu Vy
-6. **Solution · 26/10 · deadline 25/10 · Screen recording + Voice-over**
+6. **Solution · 26/10 · deadline 25/10 · Screen recording + Voice-over · video hoạt hình → [videos/aima-06](../../videos/aima-06/)**
    "Một trend vào AIMA thì chuyện gì xảy ra?": demo trực quan: Trend → AIMA phân tích → gợi ý idea → phát triển
    content → tối ưu theo platform. CTA: truy cập landing page AIMA để tìm hiểu và đăng ký dùng thử. · Anh Vũ, Bảo Yến
-7. **Product · 28/10 · deadline 27/10 · Tutorial / Screen Recording**
+7. **Product · 28/10 · deadline 27/10 · Tutorial / Screen Recording · video hoạt hình → [videos/aima-07](../../videos/aima-07/)**
    "Lần đầu dùng AIMA thì bắt đầu từ đâu?": creator phải chỉnh content cho từng platform → giới thiệu khả năng AIMA
    adapt content theo từng nền tảng. · Lan Nguyễn, Triệu Vy
-8. **Conversion · 30/10 · deadline 29/10 · Talking Head + Screen Recording**
+8. **Conversion · 30/10 · deadline 29/10 · Talking Head + Screen Recording · video hoạt hình → [videos/aima-08](../../videos/aima-08/)**
    "Dùng Free rồi, vậy nâng cấp để làm gì?": so sánh Free với Plus (199k) và Pro (499k): tự động đăng bài, hạn mức
    token cao hơn theo từng gói. CTA: chọn gói phù hợp và nâng cấp AIMA. · Thành Tuấn, Bảo Yến
 
@@ -122,8 +122,8 @@ Phụ trách: Lan Nguyễn, cùng Bảo Yến (bài lẻ) hoặc Triệu Vy (bà
 - TikTok bài 5 thuộc Solution nhưng nội dung chỉ kể vấn đề (7 cái app), chưa nhắc AIMA.
 - Chưa có URL landing page; giá chưa có đơn vị và chu kỳ (xem [product.md](product.md)).
 
-## Ứng viên làm video tiếp theo
+## Video TikTok đã làm
 
-Các bài dạng POV/skit trên TikTok hợp với kit hoạt hình này nhất: TikTok 3 (trend viral không hợp brand), TikTok 4/5
-(7 tab / 7 cái app). TikTok 1 và 2 đã làm (aima-01, aima-02). Bài demo, tutorial và talking head (TikTok 6–8) cần quay
-màn hình sản phẩm thật, nên không làm bằng kit này được.
+Cả 8 bài TikTok đã có video (aima-01 … aima-08). Bài 5 kể nhanh vấn đề rồi dẫn tới concept "có một đứa ngồi kế bên" và
+AIMA cho đúng giai đoạn Solution (aima-04 đã kể chuyện "7 tab"). Bài 6–8 trong bảng gốc là quay màn hình / talking head;
+các video ở đây là bản hoạt hình mô phỏng, nếu team vẫn quay màn hình sản phẩm thật thì dùng chúng làm storyboard.
