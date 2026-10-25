@@ -1,0 +1,98 @@
+{
+ "j_hook": {
+  "text": "Đang làm ngon trớn...",
+  "spoken": "Đang làm ngon trớn...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_out": {
+  "text": "Ơ... hết token rồi?",
+  "spoken": "Ơ... hết tô ken rồi?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_night": {
+  "text": "Rồi còn canh giờ... tự tay đăng từng bài.",
+  "spoken": "Rồi còn canh giờ... tự tay đăng từng bài.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_plans": {
+  "text": "Gói Plus 199k. Gói Pro 499k.",
+  "spoken": "Gói Plus một trăm chín mươi chín ka. Gói Pro bốn trăm chín mươi chín ka.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_auto": {
+  "text": "Tự động đăng bài...",
+  "spoken": "Tự động đăng bài...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_token": {
+  "text": "và hạn mức token cao hơn.",
+  "spoken": "và hạn mức tô ken cao hơn.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_after": {
+  "text": "Giờ thì... ngủ ngon, bài vẫn tự lên.",
+  "spoken": "Giờ thì... ngủ ngon, bài vẫn tự lên.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "j_cta": {
+  "text": "Chọn gói phù hợp và nâng cấp AIMA nhé!",
+  "spoken": "Chọn gói phù hợp và nâng cấp ai ma nhé!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

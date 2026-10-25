@@ -1,0 +1,146 @@
+{
+ "f_hook": {
+  "text": "Làm một cái content thôi. Bắt đầu!",
+  "spoken": "Làm một cái còn ten thôi. Bắt đầu!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t1": {
+  "text": "Tìm trend...",
+  "spoken": "Tìm trend...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t2": {
+  "text": "Nghĩ idea...",
+  "spoken": "Nghĩ ai đia...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t3": {
+  "text": "Viết caption...",
+  "spoken": "Viết caption...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t4": {
+  "text": "Thiết kế ảnh...",
+  "spoken": "Thiết kế ảnh...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t5": {
+  "text": "Dựng video...",
+  "spoken": "Dựng video...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t6": {
+  "text": "Lên lịch đăng...",
+  "spoken": "Lên lịch đăng...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_t7": {
+  "text": "Xem số liệu...",
+  "spoken": "Xem số liệu...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_lost": {
+  "text": "Ơ... cái caption nãy để tab nào ta?",
+  "spoken": "Ơ... cái caption nãy để táp nào ta?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_punch1": {
+  "text": "Chuyển tab...",
+  "spoken": "Chuyển táp...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_punch2": {
+  "text": "còn nhiều hơn làm content!",
+  "spoken": "còn nhiều hơn làm còn ten!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "f_ask": {
+  "text": "Bạn đang mở bao nhiêu tab vậy?",
+  "spoken": "Bạn đang mở bao nhiêu táp vậy?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

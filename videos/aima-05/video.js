@@ -4,7 +4,8 @@
 // stretch down without retiming the keys (warp() in src/core.js). Retime here, then rebuild the soundtrack.
 const knots = at => ({ rates: at.slice(0, -1).map(([e, v], i) => [e, (at[i + 1][0] - e) / (at[i + 1][1] - v)]), end: at[at.length - 1][0] });
 const TIMING = {
-  story: knots([[0, 0], [28.4, 28.4]]),
+  // a beat more before the apps (the hook line has to finish) and before the approval ("…người quyết định")
+  story: knots([[0, 0], [2.5, 2.5], [3.4, 3.9], [23.0, 23.5], [26.6, 28.0], [28.4, 29.8]]),
   outroLen: 5.2,                             // the call to action and the logo
   tiles: [3.4, 4.3, 5.3, 6.2, 7.1, 8.0, 8.9],   // seven apps jump out of the laptop, one by one, into the juggle
   drop: 10.4,                                // too many: they all come down (the creator is flattened at +.35)
@@ -19,7 +20,10 @@ const PROJECT = {
   title: 'AIMA #5 (TikTok, Solution): "POV: Làm 1 content nhưng mở 7 cái app."',
   context: 'aima',
   size: [1080, 1920],
-  duration: TIMING.story.end + TIMING.outroLen,
+  duration: (() => {
+    const { rates, end } = TIMING.story;
+    return rates.reduce((d, [e, r], i) => d + ((rates[i + 1] || [end])[0] - e) / r, 0) + TIMING.outroLen;
+  })(),
   bpm: 120, offset: 0, flatFills: false,
   audio: 'audio/soundtrack.m4a',
   scenes: ['../../assets/aima_logo.js', '../_aima/set.js', 'scene.js'],

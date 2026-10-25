@@ -1,0 +1,86 @@
+{
+ "g_hook": {
+  "text": "Làm một cái content... cần bao nhiêu app nhỉ?",
+  "spoken": "Làm một cái còn ten... cần bao nhiêu app nhỉ?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "g_apps": {
+  "text": "Tìm trend... viết caption... thiết kế... dựng video... đăng bài... xem số liệu...",
+  "spoken": "Tìm trend... viết caption... thiết kế... dựng video... đăng bài... xem số liệu...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "g_tired": {
+  "text": "Mệt quá...",
+  "spoken": "Mệt quá...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "g_wish": {
+  "text": "Ước gì... có một đứa ngồi kế bên.",
+  "spoken": "Ước gì... có một đứa ngồi kế bên.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "g_one": {
+  "text": "Trend, idea, content, đăng bài... chung một chỗ!",
+  "spoken": "Trend, ai đia, còn ten, đăng bài... chung một chỗ!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "g_decide": {
+  "text": "AI gợi ý... mình vẫn là người quyết định.",
+  "spoken": "ây ai gợi ý... mình vẫn là người quyết định.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "g_cta": {
+  "text": "Truy cập landing page AIMA để tìm hiểu thêm nhé!",
+  "spoken": "Truy cập len đinh pết ai ma để tìm hiểu thêm nhé!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

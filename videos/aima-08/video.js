@@ -4,7 +4,8 @@
 // stretch down without retiming the keys (warp() in src/core.js). Retime here, then rebuild the soundtrack.
 const knots = at => ({ rates: at.slice(0, -1).map(([e, v], i) => [e, (at[i + 1][0] - e) / (at[i + 1][1] - v)]), end: at[at.length - 1][0] });
 const TIMING = {
-  story: knots([[0, 0], [27.0, 27.0]]),
+  // slowed between the plan cards and auto-posting so the prices are read in full
+  story: knots([[0, 0], [11.6, 11.6], [15.8, 17.0], [27.0, 28.2]]),
   outroLen: 5.2,                             // the call to action and the logo
   drain: [.8, 3.2],                          // Free: the token meter runs dry while AIMA writes; it stops half-way
   clockPush: 5.0,                            // the camera rushes to the clock: 23:00 (back at +1.35)
@@ -22,7 +23,10 @@ const PROJECT = {
   title: 'AIMA #8 (TikTok, Conversion): "Dùng Free rồi, vậy nâng cấp để làm gì?"',
   context: 'aima',
   size: [1080, 1920],
-  duration: TIMING.story.end + TIMING.outroLen,
+  duration: (() => {
+    const { rates, end } = TIMING.story;
+    return rates.reduce((d, [e, r], i) => d + ((rates[i + 1] || [end])[0] - e) / r, 0) + TIMING.outroLen;
+  })(),
   bpm: 120, offset: 0, flatFills: false,
   audio: 'audio/soundtrack.m4a',
   scenes: ['../../assets/aima_logo.js', '../_aima/set.js', 'scene.js'],

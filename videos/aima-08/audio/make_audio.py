@@ -81,7 +81,7 @@ add(sfx, V_OUTRO + 1.3, sparkle(.8))                                   # the log
 print('voice-over:')
 place_vo(vo, VDIR, [                    # video time
     ('j_hook', .9), ('j_out', S(T['drain'][1]) + .2), ('j_night', S(T['manual'][0]) - .3),
-    ('j_plans', S(T['cards'][0]) + .5), ('j_auto', S(T['auto'])), ('j_token', S(T['tokens'])),
+    ('j_plans', S(T['cards'][1]) + .5), ('j_auto', S(T['auto'])), ('j_token', S(T['tokens'])),
     ('j_after', S(T['posts'][0]) + .2), ('j_cta', V_OUTRO + .45)])
 
 mixdown(music, sfx, vo, OUT)

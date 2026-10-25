@@ -99,7 +99,7 @@ add(sfx, V_OUTRO + 1.3, sparkle(.7))                                   # the log
 # ---------- voice-over ----------
 print('voice-over:')
 place_vo(vo, VDIR, [                    # video time
-    ('e_hook', S(T['notice']) + .3), ('e_go', S(T['go']) - .1),
+    ('e_hook', S(T['notice']) + .3), ('e_go', S(T['go'])),
     ('e_try1', S(T['tip']) - .9),                       # "Nến thơm mà nhảy…" while it dances, "kỳ kỳ." once it's down
     ('e_try2', S(T['neon']) - .3),                      # "Đổi màu cho bắt mắt?…" then "Không giống brand mình." on the X
     ('e_try3', S(T['fans'][0]) + .8),                   # "Mà khách của mình…" then "có thích không ta?" on the question marks

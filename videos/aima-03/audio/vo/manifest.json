@@ -1,0 +1,110 @@
+{
+ "e_hook": {
+  "text": "Ơ! Trend này đang viral nè!",
+  "spoken": "Ơ! Trend này đang vai rồ nè!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_go": {
+  "text": "Bắt trend liền thôi!",
+  "spoken": "Bắt trend liền thôi!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_try1": {
+  "text": "Nến thơm mà nhảy... kỳ kỳ.",
+  "spoken": "Nến thơm mà nhảy... kỳ kỳ.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_try2": {
+  "text": "Đổi màu cho bắt mắt?... Không giống brand mình.",
+  "spoken": "Đổi màu cho bắt mắt?... Không giống brand mình.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_try3": {
+  "text": "Mà khách của mình... có thích không ta?",
+  "spoken": "Mà khách của mình... có thích không ta?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_late": {
+  "text": "Ủa... ai cũng làm trend này rồi?",
+  "spoken": "Ủa... ai cũng làm trend này rồi?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_punch1": {
+  "text": "Thấy trend thì dễ...",
+  "spoken": "Thấy trend thì dễ...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_punch2": {
+  "text": "Biến thành content mới khó!",
+  "spoken": "Biến thành còn ten mới khó!",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "e_ask": {
+  "text": "Có ai từng nghĩ mãi, tới lúc trend hết hot chưa?",
+  "spoken": "Có ai từng nghĩ mãi, tới lúc trend hết hot chưa?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}
