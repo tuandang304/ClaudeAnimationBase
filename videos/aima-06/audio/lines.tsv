@@ -1,0 +1,9 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+h_hook	creator	Lại là trend này... Lần này, thử đưa vào AIMA xem!
+h_scan	creator	AIMA phân tích trend... so với brand của mình.
+h_idea	creator	Ba idea... chọn cái này!
+h_write	creator	Kịch bản, caption, hashtag, CTA... có sẵn để mình sửa.
+h_opt	creator	Rồi tối ưu riêng cho từng nền tảng.
+h_done	creator	Lần này... trend vào là ra content!
+h_cta	creator	Truy cập landing page AIMA để đăng ký dùng thử nhé!

@@ -1,0 +1,10 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they're read.
+j_hook	creator	Đang làm ngon trớn...
+j_out	creator	Ơ... hết token rồi?
+j_night	creator	Rồi còn canh giờ... tự tay đăng từng bài.
+j_plans	creator	Gói Plus 199k. Gói Pro 499k.
+j_auto	creator	Tự động đăng bài...
+j_token	creator	và hạn mức token cao hơn.
+j_after	creator	Giờ thì... ngủ ngon, bài vẫn tự lên.
+j_cta	creator	Chọn gói phù hợp và nâng cấp AIMA nhé!

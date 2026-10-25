@@ -4,7 +4,9 @@
 // kit's character in the brand violet, with headphones) behind a desk, a laptop on it, mugs, a paper bin.
 //   AIMA.room(t, r)           the room at any hour (the sky runs through the brand gradient, night falls on the room)
 //   AIMA.caption / .shout     the series' lettering: a caption pill, and a big two-line exclamation
-//   AIMA.outro(t, lt, dur, o) the series' ending: a question to the viewer and the small AIMA logo
+//   AIMA.outro(t, lt, dur, o) the series' ending: a question to the viewer (or a call to action) and the AIMA logo
+//   AIMA.app(k)               the AIMA app's page on the laptop screen (from #5, when the series starts naming AIMA)
+//   AIMA.candle / .dancer     the brand's candle and the viral dance (from #3)
 // Screens on the laptop draw in a 520 × 300 design space (AIMA.SW × AIMA.SH); the room scales them to fit.
 const AIMA = (() => {
   const BR = { cyan: '#4FD9EC', blue: '#4F8CF0', violet: '#8B6CF5', magenta: '#E64FE6', purple: '#9445D6' };
@@ -282,6 +284,7 @@ const AIMA = (() => {
   }
   // The series' ending: a brush wipe in, the creator asking the viewer a question (o.q: two lines), then the small AIMA
   // logo underneath (Awareness posts don't pitch the product; the logo just signs the channel). Fades to paper.
+  // From Solution on, o.q is the call to action instead and o.logoH (default 150) makes the logo bigger.
   function outro(t, lt, dur, o) {
     [[BR.cyan, 120, 1500, 380], [BR.magenta, 960, 260, 420], [BR.violet, 980, 1250, 300], [BR.blue, 80, 380, 260]].forEach(([c, x, y, r], i) => {
       boilSeed('blob' + i);
@@ -294,9 +297,51 @@ const AIMA = (() => {
     if (lt > .35) letter(o.q[0], W / 2, 560, s1, BR.violet, { screen: true, pop: (lt - .35) * 3.5, rot: -.03, stroke: PAL.cream, font: font(s1) });
     if (lt > .6) letter(o.q[1], W / 2, 560 + s1 * 1.15, s2, BR.magenta, { screen: true, pop: (lt - .6) * 3.5, rot: -.02, stroke: PAL.cream, font: font(s2) });
     const k = seg(lt, 1.3, 1.8);
-    if (k > 0) { flushLetters(); drawLogo(W / 2, 1490, 150 * backOut(k), clamp(k * 3)); }
+    if (k > 0) { flushLetters(); drawLogo(W / 2, 1490 + ((o.logoH || 150) - 150) * .3, (o.logoH || 150) * backOut(k), clamp(k * 3)); }
     if (lt < .3) brushWipe(.5 + lt / .6, o.wipe || [BR.violet, BR.magenta]);
     if (lt > dur - .7) { flushLetters(); flash(ease(seg(lt, dur - .7, dur - .05)), PAL.paper); }
+  }
+  // ---------- the recurring props from #3 on ----------
+  // The brand's product: a scented candle in a jar (x, y = the jar's base centre, s = scale). o: { t (flicker time),
+  // flame 0..1, lean, rot, neon 0..1 (the brand colours painted over), sw }.
+  const JAR = '#E7DEFF', NEON = ['#B6F23A', '#FF7A1A', '#FF3FA4'];
+  function candle(x, y, s, o = {}) {
+    const fl = o.flame ?? 1, n = o.neon ?? 0, sw = o.sw ?? .7, t = o.t ?? 0;
+    push(); translate(x, y); rotate(o.rot || 0);
+    if (fl > .02) glow(0, -66 * s, 70 * s * fl, '#FFC766', .5 * fl);
+    paint(rrPts(-22 * s, -56 * s, 44 * s, 56 * s, 8 * s), { wash: mixCol(JAR, NEON[0], n), ink: PAL.ink, sw });
+    paint(rectPts(-22 * s, -36 * s, 44 * s, 16 * s), { wash: mixCol(BR.violet, NEON[1], n), ink: null });
+    paint(ellPts(0, -28 * s, 6 * s, 4 * s, 10), { wash: mixCol(BR.cyan, NEON[2], n), ink: null });
+    paint(ellPts(0, -52 * s, 18 * s, 4 * s, 14), { wash: PAL.cream, ink: null });
+    inkLine([[0, -52 * s], [1 * s, -60 * s]], sw * .9, PAL.ink, 'inkfine', 0);
+    if (fl > .02) {
+      const w = 1 + .1 * Math.sin(t * 23), lean = (o.lean || 0) * 6 * s, h = 20 * s * fl * w;
+      paint([[lean, -60 * s - h], [6 * s * fl + lean * .3, -64 * s], [5 * s * fl, -59 * s], [0, -57 * s], [-5 * s * fl, -59 * s], [-6 * s * fl + lean * .3, -64 * s]],
+        { wash: '#FFB13D', ink: PAL.ink, sw: sw * .7, curv: .6 });
+    }
+    pop();
+  }
+  // The viral dance from #3: arms swap up and down on every beat, a hop, a sway. bx, by = the body's centre.
+  function dancer(bx, by, s, t, col) {
+    const sw = Math.sin(t * TAU), hop = 12 * s * pulse(t, 6), y = by - hop, up = Math.sin(t * TAU * 2);
+    paint(ellPts(bx + 6 * s * sw, y - 50 * s, 14 * s, 14 * s, 14), { wash: '#FFE3C8', ink: PAL.ink, sw: .45 });
+    paint(ellPts(bx + 3 * s * sw, y, 22 * s, 30 * s, 16), { wash: col, ink: PAL.ink, sw: .45 });
+    inkLine([[bx - 18 * s, y - 12 * s], [bx - 40 * s, y - 12 * s - 30 * s * up]], .8, PAL.ink, 'ink', 0);
+    inkLine([[bx + 18 * s, y - 12 * s], [bx + 40 * s, y - 12 * s + 30 * s * up]], .8, PAL.ink, 'ink', 0);
+    inkLine([[bx - 8 * s, y + 28 * s], [bx - 14 * s, by + 44 * s]], .8, PAL.ink, 'ink', 0);
+    inkLine([[bx + 8 * s, y + 28 * s], [bx + 14 * s, by + 44 * s]], .8, PAL.ink, 'ink', 0);
+  }
+
+  // The AIMA app on the laptop (screen design space): a pale page, a bar in the logo's gradient, the logo at its left.
+  // k (0..1) opens it from the centre. Draw the app's own content after it, below y = APP_TOP.
+  const APP_TOP = 40;
+  function app(k = 1) {
+    push(); translate(SW / 2, SH / 2); scale(Math.max(.01, k)); translate(-SW / 2, -SH / 2);
+    paint(rectPts(0, 0, SW, SH), { wash: '#FBF8FF', ink: null });
+    [BR.cyan, BR.blue, BR.violet, BR.magenta].forEach((c, i) => paint(rectPts(i * SW / 4, 0, SW / 4 + 1, APP_TOP), { wash: mixCol(c, PAL.cream, .55), ink: null }));
+    inkLine([[0, APP_TOP], [SW, APP_TOP]], .4, '#B9AFCB', 'inkfine', 0);
+    if (k > .95) drawLogo(60, APP_TOP / 2, 30);
+    pop();
   }
   (window.PRELOAD ||= []).push(async () => {
     LOGO = await loadImage(AIMA_LOGO);
@@ -304,5 +349,5 @@ const AIMA = (() => {
   });
 
   return { BR, CREATOR, NIGHT, TXT, HOME, CX, GY, U, WIN, CLK, DESK, FLOOR_Y, BIN, SW, SH, SCR, HINGE,
-    darkAt, skyAt, bump, K, squig, SCR_BG, creator, leftHand, ball, room, font, fit, shout, caption, drawLogo, outro };
+    darkAt, skyAt, bump, K, squig, SCR_BG, creator, leftHand, ball, room, font, fit, shout, caption, drawLogo, outro, app, APP_TOP, candle, dancer };
 })();

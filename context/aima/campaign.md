@@ -30,16 +30,16 @@ Thứ tự đăng trên mọi nền tảng: 2 bài Awareness → 2 Problem → 2
 4. **Problem · 20/10 · deadline 19/10 · POV / Fast-cut Skit · video → [videos/aima-04](../../videos/aima-04/)**
    "POV: Mở 7 tab để làm 1 cái content". Phần nội dung chính trong bảng gốc đang chép trùng bài 3 (trend không hợp
    brand); aima-04 làm theo chủ đề: mở 7 tab, mỗi tab một công cụ (theo bài Threads 4). · Lan Nguyễn, Bảo Yến
-5. **Solution · 24/10 · deadline 23/10 · Skit / Storytelling**
+5. **Solution · 24/10 · deadline 23/10 · Skit / Storytelling · video → [videos/aima-05](../../videos/aima-05/)**
    "POV: Làm 1 content nhưng mở 7 cái app.": chuyển cảnh liên tục giữa TikTok, ChatGPT, Canva, CapCut, Meta… để hoàn
    thành một content → càng làm càng rối. · Thành Tuấn, Triệu Vy
-6. **Solution · 26/10 · deadline 25/10 · Screen recording + Voice-over**
+6. **Solution · 26/10 · deadline 25/10 · Screen recording + Voice-over · video hoạt hình → [videos/aima-06](../../videos/aima-06/)**
    "Một trend vào AIMA thì chuyện gì xảy ra?": demo trực quan: Trend → AIMA phân tích → gợi ý idea → phát triển
    content → tối ưu theo platform. CTA: truy cập landing page AIMA để tìm hiểu và đăng ký dùng thử. · Anh Vũ, Bảo Yến
-7. **Product · 28/10 · deadline 27/10 · Tutorial / Screen Recording**
+7. **Product · 28/10 · deadline 27/10 · Tutorial / Screen Recording · video hoạt hình → [videos/aima-07](../../videos/aima-07/)**
    "Lần đầu dùng AIMA thì bắt đầu từ đâu?": creator phải chỉnh content cho từng platform → giới thiệu khả năng AIMA
    adapt content theo từng nền tảng. · Lan Nguyễn, Triệu Vy
-8. **Conversion · 30/10 · deadline 29/10 · Talking Head + Screen Recording**
+8. **Conversion · 30/10 · deadline 29/10 · Talking Head + Screen Recording · video hoạt hình → [videos/aima-08](../../videos/aima-08/)**
    "Dùng Free rồi, vậy nâng cấp để làm gì?": so sánh Free với Plus (199k) và Pro (499k): tự động đăng bài, hạn mức
    token cao hơn theo từng gói. CTA: chọn gói phù hợp và nâng cấp AIMA. · Thành Tuấn, Bảo Yến
 
@@ -122,8 +122,8 @@ Phụ trách: Lan Nguyễn, cùng Bảo Yến (bài lẻ) hoặc Triệu Vy (bà
 - TikTok bài 5 thuộc Solution nhưng nội dung chỉ kể vấn đề (7 cái app), chưa nhắc AIMA.
 - Chưa có URL landing page; giá chưa có đơn vị và chu kỳ (xem [product.md](product.md)).
 
-## Ứng viên làm video tiếp theo
+## Video TikTok đã làm
 
-TikTok 1–4 đã làm (aima-01 … aima-04). Còn TikTok 5 ("Làm 1 content nhưng mở 7 cái app", gần trùng chủ đề với
-aima-04: nên làm khác đi, vd. chuyển cảnh giữa các app rồi hé lộ concept "có một đứa ngồi kế bên" cho đúng giai đoạn Solution). Bài demo, tutorial và talking head (TikTok 6–8) cần quay
-màn hình sản phẩm thật, nên không làm bằng kit này được.
+Cả 8 bài TikTok đã có video (aima-01 … aima-08). Bài 5 kể nhanh vấn đề rồi dẫn tới concept "có một đứa ngồi kế bên" và
+AIMA cho đúng giai đoạn Solution (aima-04 đã kể chuyện "7 tab"). Bài 6–8 trong bảng gốc là quay màn hình / talking head;
+các video ở đây là bản hoạt hình mô phỏng, nếu team vẫn quay màn hình sản phẩm thật thì dùng chúng làm storyboard.
