@@ -1,0 +1,122 @@
+{
+ "v_hook1": {
+  "text": "Mỗi ngày đều phải nghĩ nội dung, bắt trend, rồi đăng bài...",
+  "spoken": "Mỗi ngày đều phải nghĩ nội dung, bắt trend, rồi đăng bài...",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_hook2": {
+  "text": "Mà vẫn không ai xem?",
+  "spoken": "Mà vẫn không ai xem?",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_reveal": {
+  "text": "Để AIMA lo.",
+  "spoken": "Để ai ma lo.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_s1": {
+  "text": "Khai báo thương hiệu một lần.",
+  "spoken": "Khai báo thương hiệu một lần.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_s2": {
+  "text": "AI tìm trend đang hot cho ngành của bạn.",
+  "spoken": "ây ai tìm trend đang hot cho ngành của bạn.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_s3": {
+  "text": "Tạo nội dung chuẩn từng nền tảng trong vài giây.",
+  "spoken": "Tạo nội dung chuẩn từng nền tảng trong vài giây.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_s4": {
+  "text": "Lên lịch và tự động đăng lên Facebook.",
+  "spoken": "Lên lịch và tự động đăng lên phây búc.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_proof": {
+  "text": "Hơn 23.000 lượt xem trong chiến dịch đầu tiên, và khách hàng thật đã trả phí.",
+  "spoken": "Hơn hai mươi ba nghìn lượt xem trong chiến dịch đầu tiên, và khách hàng thật đã trả phí.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_cta1": {
+  "text": "Dùng thử miễn phí tại aima-marketing.id.vn.",
+  "spoken": "Dùng thử miễn phí tại ai ma gạch ngang mác két tinh, chấm i đê, chấm vi en.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ },
+ "v_cta2": {
+  "text": "Gói Plus chỉ từ 199k mỗi tháng.",
+  "spoken": "Gói Plus chỉ từ một trăm chín mươi chín ka mỗi tháng.",
+  "voice": "Thái Sơn",
+  "tempo": 1.0,
+  "temperature": 0.4,
+  "takes": 3,
+  "pauses": {
+   "sentence": 0.45,
+   "ellipsis": 0.6
+  }
+ }
+}

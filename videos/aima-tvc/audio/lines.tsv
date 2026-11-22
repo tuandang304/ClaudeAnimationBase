@@ -1,0 +1,12 @@
+# id	role (or a preset voice name)	text	[tempo: 1 = as spoken, .9 = slower]
+# Write words the way they appear on screen ("content", "idea"); tools/voice/pronunciation.tsv decides how they are read.
+v_hook1	creator	Mỗi ngày đều phải nghĩ nội dung, bắt trend, rồi đăng bài...
+v_hook2	creator	Mà vẫn không ai xem?
+v_reveal	creator	Để AIMA lo.
+v_s1	creator	Khai báo thương hiệu một lần.
+v_s2	creator	AI tìm trend đang hot cho ngành của bạn.
+v_s3	creator	Tạo nội dung chuẩn từng nền tảng trong vài giây.
+v_s4	creator	Lên lịch và tự động đăng lên Facebook.
+v_proof	creator	Hơn 23.000 lượt xem trong chiến dịch đầu tiên, và khách hàng thật đã trả phí.
+v_cta1	creator	Dùng thử miễn phí tại aima-marketing.id.vn.
+v_cta2	creator	Gói Plus chỉ từ 199k mỗi tháng.
